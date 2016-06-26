@@ -29,7 +29,7 @@ class LandingGear(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Landing Gear',
-                              VariableName='height',
+                              VariableName='Landing gear height',
                               Default=1.6,
                               Path=self.filePath).getValue) #ToDo: per value = 0 la ruota interseca il corpo dell'aereo
 
@@ -42,7 +42,7 @@ class LandingGear(GeomBase):
         """
 
         return float(Importer(Component='Landing Gear',
-                              VariableName='gearLongPos',
+                              VariableName='Main Gear position',
                               Default=0.6,
                               Path=self.filePath).getValue)
 
@@ -55,7 +55,7 @@ class LandingGear(GeomBase):
         """
 
         return float(Importer(Component='Landing Gear',
-                              VariableName='noseGearLongPos',
+                              VariableName='Nose Gear position',
                               Default=0.08,
                               Path=self.filePath).getValue)
 
@@ -68,7 +68,7 @@ class LandingGear(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Landing Gear',
-                              VariableName='gearLatPos',
+                              VariableName='Lateral gear position',
                               Default=1.8,
                               Path=self.filePath).getValue)
 
@@ -80,7 +80,7 @@ class LandingGear(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Landing Gear',
-                              VariableName='main wheel diameter',
+                              VariableName='Main wheel radius',
                               Default=0.5,
                               Path=self.filePath).getValue)
 
@@ -92,7 +92,7 @@ class LandingGear(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Landing Gear',
-                              VariableName='nose wheel diameter',
+                              VariableName='Nose wheel radius',
                               Default=0.3,
                               Path=self.filePath).getValue)
 
@@ -411,7 +411,11 @@ class LandingGear(GeomBase):
                         "Nose wheel radius": {"value": self.noseWheelRadius, "unit": "m"}
                     },
                     "Attributes": {
-                        "Ciao": {"value": "ciao", "unit": ""}
+                        "Tipback control": {"value": self.tipbackControl, "unit": ""},
+                        "Maximum tipback angle": {"value": self.maxTipbackAngle, "unit": "deg"},
+                        "Angle of tipback": {"value": self.tipbackAngle, "unit": "deg"},
+                        "Lateral clearance control": {"value": self.checkLateralAngle, "unit": ""},
+                        "Lateral clearance angle": {"value": self.lateralAngle, "unit": ""}
                     }
 
                 }

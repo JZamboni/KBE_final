@@ -22,7 +22,7 @@ class Fuselage(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Fuselage',
-                              VariableName='fuselageLength',
+                              VariableName='Fuselage Length',
                               Default=30.0,
                               Path=self.filePath).getValue)
 
@@ -34,7 +34,7 @@ class Fuselage(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Fuselage',
-                              VariableName='fuselageDiameter',
+                              VariableName='Fuselage Diameter',
                               Default=4.0,
                               Path=self.filePath).getValue)
 

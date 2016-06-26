@@ -14,7 +14,7 @@ class JsonIn:
 
         try:
             component = self.data[self.component]
-            value = component[self.variableName]
+            value = component["Inputs"][self.variableName]["value"]
             print('LOG:    Value of ' + repr(self.variableName) + ' is set to: ' + repr(value))
         except KeyError:
             value = self.default
