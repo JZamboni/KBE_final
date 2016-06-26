@@ -300,7 +300,6 @@ class Evaluations(GeomBase):
         """Returns an opened file in read mode.
         This time the dialog just returns a filename and the file is opened by your own code.
         """
-
         # get filename
         filename = tkFileDialog.askopenfilename()
         return str(filename)
