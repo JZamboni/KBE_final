@@ -120,7 +120,7 @@ class Wake(GeomBase):
         y_1 = []
         for i in self.xCoord:
             y_1.append(Point(self.pointMAC.x,
-                             self.pointMAC.y + float((.0072 * i**3 - .1016 * i**2 + .7088 * i - .0818) * self.cMACWing),
+                             self.pointMAC.y + float((.0072 * i**3 - .1016 * i**2 + .7088 * i - .0818 + 0.25) * self.cMACWing),
                              self.pointMAC.z + float(i) * self.cMACWing))
         return y_1
 
@@ -135,7 +135,7 @@ class Wake(GeomBase):
         y_2 = []
         for i in self.xCoord:
             y_2.append(Point(self.pointMAC.x,
-                             self.pointMAC.y + float((-.0002 * i**3 - .0063 * i**2 + .1939 * i - .094) * self.cMACWing),
+                             self.pointMAC.y + float((-.0002 * i**3 - .0063 * i**2 + .1939 * i - .094 + 0.25) * self.cMACWing),
                              self.pointMAC.z + float(i) * self.cMACWing))
         return y_2
 
@@ -160,7 +160,7 @@ class Wake(GeomBase):
         y_3 = []
         for i in self.xCoord:
             y_3.append(Point(self.pointMAC.x,
-                             self.pointMAC.y + float((-.002 * i**3 + .0304 * i**2 - .1642 * i + .0882) * self.cMACWing),
+                             self.pointMAC.y + float((-.002 * i**3 + .0304 * i**2 - .1642 * i + .0882 + 0.25) * self.cMACWing),
                              self.pointMAC.z + float(i) * self.cMACWing))
         return y_3
 
@@ -197,7 +197,7 @@ class Wake(GeomBase):
         y_1 = []
         for i in self.xCoord:
             y_1.append(Point(0,
-                             self.vertPosW + float((.0072 * i**3 - .1016 * i**2 + .7088 * i - .0818) * self.cRootW),
+                             self.vertPosW + float((.0072 * i**3 - .1016 * i**2 + .7088 * i - .0818 + 0.25) * self.cRootW),
                              self.longPosW + 0.25*self.cRootW + float(i) * self.cRootW))
         return y_1
 
@@ -212,7 +212,7 @@ class Wake(GeomBase):
         y_2 = []
         for i in self.xCoord:
             y_2.append(Point(0,
-                             self.vertPosW + float((-.0002 * i**3 - .0063 * i**2 + .1939 * i - .094) * self.cRootW),
+                             self.vertPosW + float((-.0002 * i**3 - .0063 * i**2 + .1939 * i - .094 + 0.25) * self.cRootW),
                              self.longPosW + 0.25*self.cRootW + float(i) * self.cRootW))
         return y_2
 
@@ -237,7 +237,7 @@ class Wake(GeomBase):
         y_3 = []
         for i in self.xCoord:
             y_3.append(Point(0,
-                             self.vertPosW + float((-.002 * i**3 + .0304 * i**2 - .1642 * i + .0882) * self.cRootW),
+                             self.vertPosW + float((-.002 * i**3 + .0304 * i**2 - .1642 * i + .0882 + 0.25) * self.cRootW),
                              self.longPosW + 0.25*self.cRootW + float(i) * self.cRootW))
         return y_3
 
@@ -274,7 +274,7 @@ class Wake(GeomBase):
         y_1 = []
         for i in self.xCoord:
             y_1.append(Point(self.pointTip.x,
-                             self.pointTip.y + float((.0072 * i**3 - .1016 * i**2 + .7088 * i - .0818) * self.cTipW),
+                             self.pointTip.y + float((.0072 * i**3 - .1016 * i**2 + .7088 * i - .0818 + 0.25) * self.cTipW),
                              self.pointTip.z + 0.25*self.cTipW + float(i) * self.cTipW))
         return y_1
 
@@ -289,7 +289,7 @@ class Wake(GeomBase):
         y_2 = []
         for i in self.xCoord:
             y_2.append(Point(self.pointTip.x,
-                             self.pointTip.y + float((-.0002 * i**3 - .0063 * i**2 + .1939 * i - .094) * self.cTipW),
+                             self.pointTip.y + float((-.0002 * i**3 - .0063 * i**2 + .1939 * i - .094 + 0.25) * self.cTipW),
                              self.pointTip.z + 0.25*self.cTipW + float(i) * self.cTipW))
         return y_2
 
@@ -314,7 +314,7 @@ class Wake(GeomBase):
         y_3 = []
         for i in self.xCoord:
             y_3.append(Point(self.pointTip.x,
-                             self.pointTip.y + float((-.002 * i**3 + .0304 * i**2 - .1642 * i + .0882) * self.cTipW),
+                             self.pointTip.y + float((-.002 * i**3 + .0304 * i**2 - .1642 * i + .0882 + 0.25) * self.cTipW),
                              self.pointTip.z + 0.25 * self.cTipW + float(i) * self.cTipW))
         return y_3
 
