@@ -455,7 +455,7 @@ class Htp(GeomBase):
             tl = self.fuselageLength  # first guess for tail arm
             TR = self.taperRatio
             cR = self.cMACWing  # first guess for the tail root chord
-            posYMAC = 10.  # first guess for the tail MAC position
+            posYMAC = self.fuselageDiameter / 2  # first guess for the tail MAC position
 
             while (self.fuselageLength - (self.wingAC + tl + 0.75 * cR - posYMAC * tan(radians(self.sweep25)))) < 0:
                 tl = tl - self.tlDecrement

@@ -68,6 +68,18 @@ class Aircraft(GeomBase):
                               Path=self.filePath).getValue)
 
     @Input
+    def twRatio(self):
+        """
+        Aircraft Thrust to Weight ratio
+        :Unit: [ ]
+        :rtype: float
+        """
+        return float(Importer(Component='Performance',
+                              VariableName='Thrust to Weight ratio',
+                              Default=.29145,
+                              Path=self.filePath).getValue)
+
+    @Input
     def hCruise(self):
         """
         Aircraft cruise altitude
@@ -196,7 +208,9 @@ class Aircraft(GeomBase):
                       tcRatio=self.wingbase.tcRatio,
                       filePath=self.filePath,
                       nEngine=self.nEngine,
-                      enginePos=self.enginePos)
+                      enginePos=self.enginePos,
+                      mTOW=self.mTOW,
+                      twRatio=self.twRatio)
 
     @Part
     def vtpbase(self):

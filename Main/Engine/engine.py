@@ -181,7 +181,10 @@ class Engine(GeomBase):
         :Unit: [N]
         :rtype: float
         """
-        return 422713.
+        return float(Importer(Component='Performance',
+                              VariableName='MTOW',
+                              Default=422713.,
+                              Path=self.filePath).getValue)
 
     @Input(settable=settable)
     def twRatio(self):
@@ -190,7 +193,10 @@ class Engine(GeomBase):
         :Unit: [ ]
         :rtype: float
         """
-        return .29145
+        return float(Importer(Component='Performance',
+                              VariableName='Thrust to Weight ratio',
+                              Default=.29145,
+                              Path=self.filePath).getValue)
 
     @Input(settable=settable)
     def fuselageLength(self):
