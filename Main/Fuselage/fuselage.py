@@ -12,7 +12,6 @@ class Fuselage(GeomBase):
     """
     Basic class Fuselage
     """
-    # TODO: tail slenderness e tail up angle controls non vanno d'accrodo. Sistemare!
 
     @Input
     def fuselageLength(self):

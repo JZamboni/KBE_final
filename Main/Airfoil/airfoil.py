@@ -48,8 +48,7 @@ class Airfoil(GeomBase):
     @Attribute
     def pts(self):
         """
-        Extract airfoil coordinates from data file and create a list of
-        points.
+        Extract airfoil coordinates from data file and create a list of points.
 
         :rtype: collections.Sequence[Point]
         """
