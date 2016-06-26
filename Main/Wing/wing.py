@@ -285,7 +285,7 @@ class Wing(GeomBase):
 
     # ### Attributes ##################################################################################################
 
-    @Attribute  # ToDo: spostare questi negli attributi
+    @Attribute
     def airfoilRoot(self):
         """
         Path to airfoil file for wing root. It can either use a default path or letting the user choose the airfoil file.
@@ -599,17 +599,7 @@ class Wing(GeomBase):
             return -self.fuselageDiameter/2 - 1.05*self.curveRoot.minY
         else:
             showwarning("Warning", "Please choose between high or low wing configuration")
-            return 0
-
-    @Attribute
-    def xLEMAC(self):
-        """
-        Longitudinal position of leading edge of MAC. Used for positioning of other components (ie gear)
-        :Unit: [m]
-        :rtype: float
-        """
-        #TODO: sei sicurodi questa formula? cmq avendo creato la rappresentazione della MAC ora la sua posizione ce l'hai autonomamente
-        return (self.posFraction * self.fuselageLength) - (0.25*self.chordRoot)
+            return 0.
 
     @Attribute
     def outputList(self):
