@@ -415,7 +415,9 @@ class LandingGear(GeomBase):
                         "Maximum tipback angle": {"value": self.maxTipbackAngle, "unit": "deg"},
                         "Angle of tipback": {"value": self.tipbackAngle, "unit": "deg"},
                         "Lateral clearance control": {"value": self.checkLateralAngle, "unit": ""},
-                        "Lateral clearance angle": {"value": self.lateralAngle, "unit": ""}
+                        "Lateral clearance angle": {"value": self.lateralAngle, "unit": ""},
+                        "Longitudinal pos of main wheel": {"value": self.hubLongPos, "unit": "m"},
+                        "Longitudinal pos of nose wheel": {"value": self.noseHubLongPos, "unit": "m"},
                     }
 
                 }
