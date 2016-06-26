@@ -8,7 +8,7 @@ from tkMessageBox import *
 class Outporter:
 
 
-    def __init__(self, ListValues, Path = []):
+    def __init__(self, ListValues, Path):
         self.listValues = ListValues
         self.filePath = Path
 
@@ -53,7 +53,7 @@ class Outporter:
 
             outputPath = os.path.dirname(Output.__file__) + '\output ' + finalString + '.json'
 
-            from IOPorters.jsonOut import JsonOutOut as VarOutporter
+            from IOPorters.jsonOut import JsonOut as VarOutporter
 
         else:
             print ('Warning:    File type ' + repr(fileExt) + ' is not supported in this application. '

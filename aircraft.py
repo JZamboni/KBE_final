@@ -139,43 +139,12 @@ class Aircraft(GeomBase):
 
     @Attribute
     def listValues(self):
-        lst = [["Project name", self.projectName],
-               [None],
-               ["Component:", "Variable:", "Value:", "Unit:"]]
-        lst.extend(self.fuselage.outputList)
-        lst.extend(self.wingbase.outputList)
-        lst.extend([["EOF"]])
-        return lst
-
-    # ### Attributes ##################################################################################################
-
-    @Attribute
-    def filePath(self):
-        """Returns an opened file in read mode.
-        This time the dialog just returns a filename and the file is opened by your own code.
-        """
-        defaultPath = os.path.dirname(Files.__file__)
-        defaultFile = os.path.dirname(Files.__file__) + '\input.xlsx'
-        file_opt = options = {}
-        options['initialdir'] = defaultPath
-        options['initialfile'] = defaultFile
-        # get filename
-        filename = tkFileDialog.askopenfilename(**file_opt)
-        return str(filename)
-
-    @Attribute
-    def outputResult(self):
-        return Outporter(ListValues=self.listValues,
-                         Path=self.filePath).writeValues()
-
-    @Attribute
-    def listValues(self):
-        lst = [["Project name", self.projectName],
-               [None],
-               ["Component:", "Variable:", "Value:", "Unit:"]]
-        lst.extend(self.fuselage.outputList)
-        lst.extend(self.wingbase.outputList)
-        lst.extend([["EOF"]])
+        lst = {}
+        lst.update(self.fuselage.outputList)
+        lst.update(self.enginebase.outputList)
+        lst.update(self.evaluations.outputList)
+        lst.update(self.landingGear.outputList)
+        lst.update(self.htpbase.outputList)
         return lst
 
     #### Parts ####

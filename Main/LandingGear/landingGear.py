@@ -394,6 +394,23 @@ class LandingGear(GeomBase):
 
         return Ymlg
 
+    @Attribute
+    def outputList(self):
+        lst = {}
+        inputs = {
+            "Landing Gear":
+                {
+                    "Landing gear height": {"value": self.height, "unit": "m"},
+                    "Main Gear position": {"value": self.longPos, "unit": ""},
+                    "Nose Gear position": {"value": self.noseLongPos, "unit": ""},
+                    "Lateral gear position": {"value": self.latPos, "unit": ""},
+                    "Main wheel radius": {"value": self.wheelRadius, "unit": "m"},
+                    "Nose wheel radius": {"value": self.noseWheelRadius, "unit": "m"}
+                }
+        }
+        lst.update(inputs)
+        return lst
+
 ################
 
     @Part
