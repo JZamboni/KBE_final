@@ -1,0 +1,16 @@
+{
+    "Configuration": {
+        "Engine Position": "wing", 
+        "Tail Type": "T tail", 
+        "Wing Position": "low wing"
+    }, 
+    "Performance": {
+        "Cruise Altitude": 10000.0, 
+        "MTOW": 422713.0, 
+        "Mach cruise": {
+            "unit": "", 
+            "value": 0.77
+        }, 
+        "Wing Loading": 5000.0
+    }
+}
