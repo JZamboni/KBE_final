@@ -31,4 +31,36 @@ fileJ.update(Configuration)
 
 fout = open('C:\Users\Jacopo\Desktop\Academic\GitHub\KBE_Retake\Output\jsonfile.json', 'w')
 
-json.dump(fileJ, fout, indent=4, sort_keys=True)
+
+
+lst1 = {}
+inputs = {
+    "Fuselage":
+        {
+            "Fuselage Length": {"value": 30.0, "unit": "m"},
+            "Fuselage Diameter": {"value": 35.0, "unit": "m"},
+            "Nose Slenderness": {"value": 24, "unit": ""},
+            "Tail Slenderness": {"value": True, "unit": ""},
+            "Tail Up Angle": {"value": 'tail up', "unit": ""}
+        }
+}
+lst1.update(inputs)
+
+lst2 = {}
+inputs = {
+    "Wing":
+        {
+            "Fuselage Length": {"value": 30.0, "unit": "m"},
+            "Fuselage Diameter": {"value": 35.0, "unit": "m"},
+            "Nose Slenderness": {"value": 24, "unit": ""},
+            "Tail Slenderness": {"value": True, "unit": ""},
+            "Tail Up Angle": {"value": 'tail up', "unit": ""}
+        }
+}
+lst2.update(inputs)
+
+lstA = {}
+lstA.update(lst1)
+lstA.update(lst2)
+
+print json.dumps(lstA,indent=4, sort_keys=True)
