@@ -163,11 +163,11 @@ class Xfoil(GeomBase):
         if self.surface == "vertical tail plane":
             return Point(0,
                          self.vertPos + self.chordRoot * tan(sweepLE) +
-                         self.perc * (self.span * (1 + (tan(sweepLE)) ** 2) - self.chordRoot * tan(sweepLE)),
+                         self.perc * 0.999 * (self.span * (1 + (tan(sweepLE)) ** 2) - self.chordRoot * tan(sweepLE)),
                          self.longPos)
         else:
             return Point(self.chordRoot * tan(sweepLE) +
-                         self.perc * (self.span * (1 + (tan(sweepLE)) ** 2) - self.chordRoot * tan(sweepLE)),
+                         self.perc * 0.999 * (self.span * (1 + (tan(sweepLE)) ** 2) - self.chordRoot * tan(sweepLE)),
                          0,
                          self.longPos)
 
@@ -178,7 +178,11 @@ class Xfoil(GeomBase):
         :Unit: [ ]
         :rtype: Point
         """
-        return self.airfoil.edges[0].equispaced_points(100)
+        lst = []
+        for edges in self.airfoil.edges:
+            lst.extend(edges.equispaced_points(100))
+            #self.airfoil.edges[0].equispaced_points(100)
+        return lst
 
     @Attribute
     def pointsxfoil2D(self):
