@@ -29,7 +29,7 @@ class ExcelOut:
 
         for component in lst:
 
-            _ = ws.cell(column=1, row=row, value="%s:" % component)
+            _ = ws.cell(column=1, row=row, value="%s" % component)
             _ = ws.cell(column=2, row=row, value="Inputs:")
 
             row += 2
