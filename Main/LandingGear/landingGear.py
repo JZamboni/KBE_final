@@ -344,7 +344,7 @@ class LandingGear(GeomBase):
     @Attribute
     def hubHeightPos(self):
         """
-        Length of the main landing gear length.
+        Length of the main landing gear.
         :Unit: [m]
         :type: float
         :return:
@@ -416,8 +416,11 @@ class LandingGear(GeomBase):
                         "Angle of tipback": {"value": self.tipbackAngle, "unit": "deg"},
                         "Lateral clearance control": {"value": self.checkLateralAngle, "unit": ""},
                         "Lateral clearance angle": {"value": self.lateralAngle, "unit": ""},
-                        "Longitudinal pos of main wheel": {"value": self.hubLongPos, "unit": "m"},
-                        "Longitudinal pos of nose wheel": {"value": self.noseHubLongPos, "unit": "m"},
+                        "Longitudinal pos of main gear": {"value": self.hubLongPos, "unit": "m"},
+                        "Longitudinal pos of nose gear": {"value": self.noseHubLongPos, "unit": "m"},
+                        "Main landing gear length": {"value": self.hubHeightPos, "unit": "m"},
+                        "Nose landing gear length": {"value": self.noseHeightPos, "unit": "m"},
+                        "Lateral pos of main gear": {"value": self.hubLatPos, "unit": "m"}
                     }
 
                 }

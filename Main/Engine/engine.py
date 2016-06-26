@@ -30,7 +30,7 @@ class Engine(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Engine',
-                              VariableName='BPR',
+                              VariableName='Engine bypass ratio',
                               Default=3.0,
                               Path=self.filePath).getValue)
 
@@ -42,7 +42,7 @@ class Engine(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Engine',
-                              VariableName='a0',
+                              VariableName='Speed of sound at sea level',
                               Default=340.3,
                               Path=self.filePath).getValue)
 
@@ -54,7 +54,7 @@ class Engine(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Engine',
-                              VariableName='rho0',
+                              VariableName='Air density at sea level',
                               Default=1.225,
                               Path=self.filePath).getValue)
 
@@ -66,7 +66,7 @@ class Engine(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Engine',
-                              VariableName='TIT',
+                              VariableName='Temperature at Inlet of Turbine',
                               Default=1375.,
                               Path=self.filePath).getValue)
 
@@ -78,7 +78,7 @@ class Engine(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Engine',
-                              VariableName='etaNozzle',
+                              VariableName='Nozzle efficiency',
                               Default=.97,
                               Path=self.filePath).getValue)
 
@@ -90,7 +90,7 @@ class Engine(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Engine',
-                              VariableName='etaMech',
+                              VariableName='Mechanical efficiency',
                               Default=.75,
                               Path=self.filePath).getValue)
 
@@ -102,7 +102,7 @@ class Engine(GeomBase):
         :rtype: string
         """
         return str(Importer(Component='Engine',
-                            VariableName='cowling Type',
+                            VariableName='Cowling type',
                             Default='partial',
                               Path=self.filePath).getValue)
 
@@ -114,7 +114,7 @@ class Engine(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Engine',
-                              VariableName='cowling Position',
+                              VariableName='Cowling position',
                               Default=.75,
                               Path=self.filePath).getValue)
 
@@ -126,7 +126,7 @@ class Engine(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Engine',
-                              VariableName='cowling Stagger',
+                              VariableName='Engine-LE stagger',
                               Default=-0.15,
                               Path=self.filePath).getValue)
 
@@ -614,7 +614,14 @@ class Engine(GeomBase):
                         "Engine-LE stagger": {"value": self.engineStagger, "unit": ""}
                     },
                     "Attributes": {
-                        "Ciao": {"value": "ciao", "unit": ""}
+                        "Engine thrust at Take-Off": {"value": self.thrustTO, "unit": "N"},
+                        "Specific gas generator power": {"value": self.specificGenPower, "unit": "W"},
+                        "Engine mass flow": {"value": self.massFlow, "unit": "kg/s"},
+                        "Inlet diameter": {"value": self.inletDiameter, "unit": "m"},
+                        "Length of the engine nacelle": {"value": self.nacelleLength, "unit": "m"},
+                        "Length of the engine cowling": {"value": self.cowlLength, "unit": "m"},
+                        "Diameter of the engine nacelle": {"value": self.nacelleDiameter, "unit": "m"},
+                        "Diameter of the engine core": {"value": self.coreDiameter, "unit": "m"}
                     }
 
                 }
