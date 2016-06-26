@@ -565,10 +565,15 @@ class Evaluations(GeomBase):
     def outputList(self):
         lst = {}
         inputs ={
-            "Fuselage":
+            "Evaluations":
                 {
-                 "Wing airfoil efficiency factor": {"value": self.airfoilEffW, "unit": ""},
-                 "Htp airfoil efficiency factor": {"value": self.airfoilEffT, "unit": ""}
+                    "Inputs":{
+                        "Wing airfoil efficiency factor": {"value": self.airfoilEffW, "unit": ""},
+                        "Htp airfoil efficiency factor": {"value": self.airfoilEffT, "unit": ""}},
+                    "Attributes":{
+                        "Ciao": {"value": self.airfoilEffW, "unit": ""}
+                    }
+
                  }
         }
         lst.update(inputs)
