@@ -22,7 +22,7 @@ class Fuselage(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Fuselage',
-                              VariableName='fuselageLength',
+                              VariableName='Fuselage Length',
                               Default=30.0,
                               Path=self.filePath).getValue)
 
@@ -34,7 +34,7 @@ class Fuselage(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Fuselage',
-                              VariableName='fuselageDiameter',
+                              VariableName='Fuselage Diameter',
                               Default=4.0,
                               Path=self.filePath).getValue)
 
@@ -63,7 +63,7 @@ class Fuselage(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Fuselage',
-                              VariableName='tailSlenderness',
+                              VariableName='Tail Slenderness',
                               Default=2.11,
                               Path=self.filePath).getValue)
 
@@ -111,7 +111,7 @@ class Fuselage(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Fuselage',
-                              VariableName='tailUpAngle',
+                              VariableName='Tail Up Angle',
                               Default=5.0,
                               Path=self.filePath).getValue)
 
@@ -325,16 +325,27 @@ class Fuselage(GeomBase):
     @Attribute
     def outputList(self):
         lst = {}
-        inputs ={
+
+        inputs = {
             "Fuselage":
                 {
-                 "Fuselage Length": {"value": self.fuselageLength, "unit": "m"},
-                 "Fuselage Diameter": {"value": self.fuselageDiameter, "unit": "m"},
-                 "Nose Slenderness": {"value": self.noseSlenderness, "unit": ""},
-                 "Tail Slenderness": {"value": self.tailSlenderness, "unit": ""},
-                 "Tail Up Angle": {"value": self.tailUpAngle, "unit": ""}
-                 }
+                    "Inputs": {
+                        "Fuselage Length": {"value": self.fuselageLength, "unit": "m"},
+                        "Fuselage Diameter": {"value": self.fuselageDiameter, "unit": "m"},
+                        "Tail Slenderness": {"value": self.tailSlendernessCalc, "unit": ""},
+                        "Tail Up Angle": {"value": self.maxTailUp, "unit": "deg"}
+                    },
+                    "Attributes": {
+                        "Tail divergence angle": {"value": self.tailDivergenceAngle, "unit": "deg"},
+                        "Nose Slenderness": {"value": self.noseSlenderness, "unit": ""},
+                        "Nose length": {"value": self.noseLength, "unit": "m"},
+                        "Cylinder length": {"value": self.cylinderLength, "unit": "m"},
+                        "Tail length": {"value": self.tailLength, "unit": "m"}
+                    }
+
+                }
         }
+
         lst.update(inputs)
         return lst
 
