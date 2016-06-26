@@ -140,7 +140,7 @@ class Aircraft(GeomBase):
                             Default='low wing',
                             Path=self.filePath).getValue)
 
-    #### Attributes ###
+    # ### Attributes ###
 
     @Attribute
     def filePath(self):
@@ -190,6 +190,7 @@ class Aircraft(GeomBase):
                             "Cruise Mach number": {"value": self.maCruise, "unit": ""},
                             "Wing loading": {"value": self.wingLoading, "unit": "kg / m^2"},
                             "Maximum takeoff weight": {"value": self.mTOW, "unit": "N"},
+                            "Thrust to Weight ratio": {"value": self.twRatio, "unit": ""},
                             "Aircraft cruise altitude": {"value": self.hCruise, "unit": "m"},
                         },
                     "Attributes":
@@ -336,7 +337,8 @@ class Aircraft(GeomBase):
                            nacelleLength=self.enginebase.nacelleLength,
                            fuselage=self.fuselage.loft,
                            wing=self.wingbase.rightWing,
-                           enginePos=self.enginebase.enginePos)
+                           enginePos=self.enginebase.enginePos,
+                           filePath=self.filePath)
 
 
 if __name__ == '__main__':

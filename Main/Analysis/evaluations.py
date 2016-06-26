@@ -9,6 +9,7 @@ from tkFileDialog import askopenfilename
 from Main.Airfoil.airfoil import Airfoil
 from Input import Airfoils
 import Tkinter, Tkconstants, tkFileDialog
+from Handler.importer import Importer
 
 
 class Evaluations(GeomBase):
@@ -23,7 +24,10 @@ class Evaluations(GeomBase):
         :Unit: [ ]
         :rtype: float
         """
-        return .95
+        return float(Importer(Component='Evaluations',
+                              VariableName='Wing airfoil efficiency factor',
+                              Default=.95,
+                              Path=self.filePath).getValue)
 
     @Input
     def airfoilEffT(self):
@@ -32,7 +36,10 @@ class Evaluations(GeomBase):
         :Unit: [ ]
         :rtype: float
         """
-        return .95
+        return float(Importer(Component='Evaluations',
+                              VariableName='Wing airfoil efficiency factor',
+                              Default=.95,
+                              Path=self.filePath).getValue)
 
     @Input
     def precision(self):
@@ -152,7 +159,6 @@ class Evaluations(GeomBase):
         :rtype: float
         """
         return 3.5
-
 
     @Input(settable=settable)
     def longPosW(self):
@@ -289,6 +295,16 @@ class Evaluations(GeomBase):
         """
         return 'wing'
 
+    @Input(settable=settable)
+    def filePath(self):
+        """Returns an opened file in read mode.
+        This time the dialog just returns a filename and the file is opened by your own code.
+        """
+
+        # get filename
+        filename = tkFileDialog.askopenfilename()
+        return str(filename)
+
     # ### Evaluations #################################################################################################
 
     # ### Surfaces ####################################################################################################
@@ -338,7 +354,7 @@ class Evaluations(GeomBase):
     @Attribute
     def clAlphaWF(self):
         """
-        Lift rate coefficient of wing plus fuselage
+        Fuselage-Wing lift gradient
         :Unit: [1/rad]
         :rtype: float
         source: KBE support material
@@ -346,7 +362,6 @@ class Evaluations(GeomBase):
         A = (1 + 2.15 * self.fuselageDiameter / self.spanW) * self.exposedSurf / self.surfaceW
         B = pi * (self.fuselageDiameter**2) / (2 * self.surfaceW)
         return self.clAlphaW * A + B
-
 
     @Attribute
     def clAlphaT(self):
@@ -567,13 +582,23 @@ class Evaluations(GeomBase):
         inputs ={
             "Evaluations":
                 {
-                    "Inputs":{
-                        "Wing airfoil efficiency factor": {"value": self.airfoilEffW, "unit": ""},
-                        "Htp airfoil efficiency factor": {"value": self.airfoilEffT, "unit": ""}},
-                    "Attributes":{
-                        "CG position": {"value": self.cg, "unit": "m"},
-                        "AC wing position": {"value": self.acW, "unit": "m"}
-                    }
+                    "Inputs":
+                        {
+                            "Wing airfoil efficiency factor": {"value": self.airfoilEffW, "unit": ""},
+                            "Htp airfoil efficiency factor": {"value": self.airfoilEffT, "unit": ""}
+                        },
+                    "Attributes":
+                        {
+                            "Wing exposed surface": {"value": self.exposedSurf, "unit": "m^2"},
+                            "Wing wetted surface": {"value": self.wettedSurf, "unit": "m^2"},
+                            "Wing lift curve slope": {"value": self.clAlphaW, "unit": "1/rad"},
+                            "Fuselage-Wing lift gradient": {"value": self.clAlphaWF, "unit": "1/rad"},
+                            "Htp lift curve slope": {"value": self.clAlphaT, "unit": "1/rad"},
+                            "Wing downwash gradient on htp": {"value": self.downwashGradW, "unit": ""},
+                            "Aircraft-less-tail AC position": {"value": self.ac, "unit": "m"},
+                            "Aircraft-less-tail CG position": {"value": self.cg, "unit": "m"},
+                            "AC wing position": {"value": self.acW, "unit": "m"}
+                        }
 
                  }
         }
