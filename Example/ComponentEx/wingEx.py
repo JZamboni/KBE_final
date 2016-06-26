@@ -179,7 +179,7 @@ class Wing(GeomBase):
 
     # ### Attributes ##################################################################################################
 
-    @Attribute  # ToDo: spostare questi negli attributi
+    @Attribute
     def airfoilRoot(self):
         """
         Path to airfoil file for wing root. It can either use a default path or letting the user choose the airfoil file.
@@ -239,6 +239,8 @@ class Wing(GeomBase):
         :Unit: [m^2]
         :rtype: float
         """
+        surface = self.mTOW / self.wingLoading
+        rootCr = 2 * surface / ((1 + self.taperRatio) * self.span)
         return self.mTOW / self.wingLoading
 
     @Attribute
@@ -249,7 +251,6 @@ class Wing(GeomBase):
         :rtype: float
         """
 
-        # ToDo: Potrebbe essere meglio metterlo come input?
         return 0.2 * (2 - radians(self.sweep25))
 
     @Attribute

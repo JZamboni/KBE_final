@@ -46,8 +46,6 @@ class Wing(GeomBase):
 
         :rtype: boolean
         """
-        # TODO: aggiungere path semplificato direttamente nella cartella airfoil
-        # TODO: aggiungere piccola spiegazione prima airfoil root poi tip
         return False
 
     @Input
@@ -66,15 +64,15 @@ class Wing(GeomBase):
     def maTechnology(self):
         """
         Wing airfoil Mach technology parameter, higher values mean higher possible Mach.
-        The technology factor in the formula is equal to 0.87 for NACA 6 airfoil and 1 to other conventional airfoils.
+        The technology factor in the formula is equal to 0.87 for NACA 6 airfoil, 0.935 for supercritical airfoils
+        and 1 to other conventional airfoils.
 
         :Unit: [ ]
         :rtype: float
         """
-        #ToDo: si deve rendere possibile la selezione in base all'airfoil?
         return float(Importer(Component='Wing',
                               VariableName='Airfoil Mach technology parameter',
-                              Default=0.935,
+                              Default=1.0,
                               Path=self.filePath).getValue)
 
     @Input
@@ -118,7 +116,6 @@ class Wing(GeomBase):
         :rtype: float
         """
         pos = (self.noseLength + self.cylinderLength * self.cylinderFraction) / self.fuselageLength
-        #ToDo: riguardando il ppt dice che la percentuale e'da prendere rispetto alla parte cilindrica del fuselage. Non di tutto il fuselage!
         return pos
 
     @Input
@@ -359,7 +356,16 @@ class Wing(GeomBase):
         :Unit: [m^2]
         :rtype: float
         """
-        return self.mTOW / self.wingLoading
+        surface = self.mTOW / self.wingLoading
+        span = sqrt(surface * self.aspectRatio)
+        rootCr = 2 * surface / ((1 + self.taperRatio) * span)
+
+        if rootCr > 0.33 * self.fuselageLength:
+            showwarning("Warning", "Attention: the wing surface is too big for the selected fuselage. "
+                                   "This might produce unexpected results."
+                                   "Please reduce MTOW accordingly.")
+
+        return surface
 
     @Attribute
     def sweep50(self):

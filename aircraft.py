@@ -16,7 +16,7 @@ import tkFileDialog
 import os
 from parapy.exchange.step import STEPWriter
 
-#ToDo: se il fuselage viene accorciato o rimpicciolito troppo va tutto a puttane... si deve assolutamente trovare una soluzione
+
 class Aircraft(GeomBase):
     """
     Basic class Aircraft
@@ -310,7 +310,6 @@ class Aircraft(GeomBase):
                            wing=self.wingbase.rightWing,
                            engines=self.enginebase.engineSolid,
                            htp=self.htpbase.rightTail)
-    # TODO: aggiungere waring a controllo carrello
 
     @Part
     def evaluations(self):

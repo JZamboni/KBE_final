@@ -62,7 +62,7 @@ class Outporter:
                                                                   " The file will be exported in .json format.")
             outputPath = os.path.dirname(Output.__file__) + '\output ' + finalString + '.json'
 
-            from IOPorters.jsonOut import JsonOutOut as VarOutporter
+            from IOPorters.jsonOut import JsonOut as VarOutporter
 
         myOutporter = VarOutporter(ListValues=self.listValues,
                                    outputPath=outputPath)

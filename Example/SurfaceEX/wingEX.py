@@ -187,7 +187,7 @@ class WingEX(GeomBase):
 
     # ### Attributes ##################################################################################################
 
-    @Attribute  # ToDo: spostare questi negli attributi
+    @Attribute
     def airfoilRoot(self):
         """
         Path to airfoil file for wing root. It can either use a default path or letting the user choose the airfoil file.
@@ -257,7 +257,6 @@ class WingEX(GeomBase):
         :rtype: float
         """
 
-        # ToDo: Potrebbe essere meglio metterlo come input?
         return 0.2 * (2 - radians(self.sweep25))
 
     @Attribute
@@ -441,7 +440,6 @@ class WingEX(GeomBase):
         :Unit: [m]
         :rtype: float
         """
-        #TODO: sei sicurodi questa formula? cmq avendo creato la rappresentazione della MAC ora la sua posizione ce l'hai autonomamente
         return (self.posFraction * self.fuselageLength) - (0.25*self.chordRoot)
 
     # ###### Parts ####################################################################################################

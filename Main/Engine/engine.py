@@ -141,6 +141,17 @@ class Engine(GeomBase):
                               Default=0.01,
                               Path=self.filePath).getValue)
 
+    @Input
+    def fusLongPos(self):
+        """
+        Longitudinal position on fuselage wrt to the nacelle length.
+        :return:
+        """
+        return float(Importer(Component='Engine',
+                              VariableName='Engine longitudinal pos on fuselage',
+                              Default=0.2,
+                              Path=self.filePath).getValue)
+
     window = Tk()
     window.wm_withdraw()
 
@@ -606,8 +617,7 @@ class Engine(GeomBase):
                     self.engineStagger * self.chord70 + tan(radians(self.sweepLE)) * self.latPos[1] +
                     self.wingLongPos - self.cowlLength]
         elif self.nEngine == 2 and self.enginePos == 'fuselage':
-            return [self.noseLength + self.cylinderLength - 0.20 * self.nacelleLength]
-        #ToDo: la posizione longitudinal non garantisce che il motore non esca dalla fuselage.
+            return [self.noseLength + self.cylinderLength + self.fusLongPos * self.nacelleLength]
 
 
     @Attribute
@@ -627,7 +637,8 @@ class Engine(GeomBase):
                         "Cowling type": {"value": self.cowlingType, "unit": ""},
                         "Cowling position": {"value": self.cowlingPos, "unit": ""},
                         "Engine-LE stagger": {"value": self.engineStagger, "unit": ""},
-                        "Engine vertical pos on fuselage": {"value": self.fusVertPos, "unit": ""}
+                        "Engine vertical pos on fuselage": {"value": self.fusVertPos, "unit": ""},
+                        "Engine longitudinal pos on fuselage": {"value": self.fusLongPos, "unit": ""}
                     },
                     "Attributes": {
                         "Engine thrust at Take-Off": {"value": self.thrustTO, "unit": "N"},
