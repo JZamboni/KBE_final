@@ -144,6 +144,14 @@ class Aircraft(GeomBase):
                             Default='low wing',
                             Path=self.filePath).getValue)
 
+    @Input
+    def outputExt(self):
+        """
+        Extension of output file.
+        :return:
+        """
+        return 'as Input'
+
     # ### Attributes ##################################################################################################
 
     @Attribute
@@ -167,7 +175,8 @@ class Aircraft(GeomBase):
         Trigger the creation of the output file
         """
         return Outporter(ListValues=self.listValues,
-                         Path=self.filePath).writeValues()
+                         Path=self.filePath,
+                         OutputExt=self.outputExt).writeValues()
 
     @Attribute
     def outputSTEP(self):

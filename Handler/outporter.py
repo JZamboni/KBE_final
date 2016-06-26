@@ -8,9 +8,10 @@ from tkMessageBox import *
 class Outporter:
 
 
-    def __init__(self, ListValues, Path):
+    def __init__(self, ListValues, Path, OutputExt):
         self.listValues = ListValues
         self.filePath = Path
+        self.outputExt = OutputExt
 
     def fileName(self):
         """
@@ -26,7 +27,10 @@ class Outporter:
 
         :return:
         """
-        name, extension = os.path.splitext(filePath)
+        if self.outputExt == 'as Input':
+            name, extension = os.path.splitext(filePath)
+        else:
+            extension = self.outputExt
         return str(extension)
 
     ##### Importer selection based on file extension #####
