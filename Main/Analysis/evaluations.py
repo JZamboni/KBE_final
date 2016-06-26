@@ -561,6 +561,18 @@ class Evaluations(GeomBase):
             acSum = +self.kn * ln * (self.nacelleDiameter**2) / (self.surfaceW * self.cMACW * self.clAlphaWF)
         return acSum
 
+    @Attribute
+    def outputList(self):
+        lst = {}
+        inputs ={
+            "Fuselage":
+                {
+                 "Wing airfoil efficiency factor": {"value": self.airfoilEffW, "unit": ""},
+                 "Htp airfoil efficiency factor": {"value": self.airfoilEffT, "unit": ""}
+                 }
+        }
+        lst.update(inputs)
+        return lst
 
 
     # ###### Parts ####################################################################################################

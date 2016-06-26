@@ -92,6 +92,30 @@ class Aircraft(GeomBase):
                               Default='T tail',
                               Path=self.filePath).getValue)
 
+    @Input
+    def nEngine(self):
+        """
+        Number of engine of the aircraft
+        :Unit: [ ]
+        :rtype: integer
+        """
+        return float(Importer(Component='Configuration',
+                              VariableName='nEngine',
+                              Default=2.,
+                              Path=self.filePath).getValue)
+
+    @Input
+    def enginePos(self):
+        """
+        Engine position, could be either "wing" or "fuselage" mounted
+        :Unit: [ ]
+        :rtype: float
+        """
+        return str(Importer(Component='Configuration',
+                            VariableName='engine Position',
+                            Default='wing',
+                            Path=self.filePath).getValue)
+
     #### Attributes ###
 
     @Attribute
@@ -191,7 +215,9 @@ class Aircraft(GeomBase):
                       dihedral=self.wingbase.dihedral,
                       sweepLE=self.wingbase.sweepLE,
                       tcRatio=self.wingbase.tcRatio,
-                      filePath=self.filePath)
+                      filePath=self.filePath,
+                      nEngine=self.nEngine,
+                      enginePos=self.enginePos)
 
     @Part
     def vtpbase(self):
