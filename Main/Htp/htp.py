@@ -10,6 +10,7 @@ from Main.Airfoil.airfoil import Airfoil
 from Handler.htpCalc import HtpCalc
 from Handler.xFoil import Xfoil
 from Input import Airfoils
+from Handler.importer import Importer
 import Tkinter, Tkconstants, tkFileDialog
 
 
@@ -49,7 +50,10 @@ class Htp(GeomBase):
         if self.tailType == 'T tail':
             return 1.
         else:
-            return .75
+            return float(Importer(Component='Htp',
+                                  VariableName='Horizontal height of htp in percentage of vtp',
+                                  Default=.75,
+                                  Path=self.filePath).getValue)
 
     @Input(settable=False)
     def hVertPercCalc(self):
@@ -152,7 +156,10 @@ class Htp(GeomBase):
         :Unit: [ ]
         :rtype: float
         """
-        return .5
+        return float(Importer(Component='Htp',
+                              VariableName='Span percentage for xFoil analysis',
+                              Default=.5,
+                              Path=self.filePath).getValue)
 
     window = Tk()
     window.wm_withdraw()
@@ -601,18 +608,25 @@ class Htp(GeomBase):
         inputs ={
             "Htp":
                 {
-                 "Horizontal height of htp in percentage of vtp": {"value": self.hVertPerc, "unit": ""},
-                 "Htp aspect ratio": {"value": self.aspectRatio, "unit": ""},
-                 "Htp taper ratio": {"value": self.taperRatio, "unit": ""},
-                 "Htp sweep at quarter chord": {"value": self.sweep25, "unit": "deg"},
-                 "Horizontal tail volume coefficient": {"value": self.vc, "unit": ""},
-                 "Span percentage for xFoil analysis": {"value": self.percxfoil, "unit": ""},
-                 "Horizontal tail arm": {"value": self.tl, "unit": "m"},
-                 "Horizontal tail reference surface": {"value": self.surface, "unit": "m^2"},
-                 "Horizontal tail span": {"value": self.span, "unit": "m"},
-                 "Horizontal tail root chord": {"value": self.chordRoot, "unit": "m"},
-                 "Horizontal tail tip chord": {"value": self.chordTip, "unit": "m"},
-                 "Horizontal tail Mean Aerodynamic Chord": {"value": self.cMAC, "unit": "m"}
+                    "Inputs":
+                        {
+                            "Horizontal height of htp in percentage of vtp": {"value": self.hVertPerc, "unit": ""},
+                            "Span percentage for xFoil analysis": {"value": self.percxfoil, "unit": ""}
+                        },
+                    "Attributes":
+                        {
+                            "Horizontal tail arm": {"value": self.tl, "unit": "m"},
+                            "Horizontal tail volume coefficient": {"value": self.vc, "unit": ""},
+                            "Htp sweep at quarter chord": {"value": self.sweep25, "unit": "deg"},
+                            "Htp taper ratio": {"value": self.taperRatio, "unit": ""},
+                            "Htp aspect ratio": {"value": self.aspectRatio, "unit": ""},
+                            "Horizontal tail reference surface": {"value": self.surface, "unit": "m^2"},
+                            "Horizontal tail span": {"value": self.span, "unit": "m"},
+                            "Horizontal tail root chord": {"value": self.chordRoot, "unit": "m"},
+                            "Horizontal tail tip chord": {"value": self.chordTip, "unit": "m"},
+                            "Horizontal tail Mean Aerodynamic Chord": {"value": self.cMAC, "unit": "m"}
+                        }
+
                  }
         }
         lst.update(inputs)
