@@ -116,6 +116,15 @@ class Aircraft(GeomBase):
                             Default='wing',
                             Path=self.filePath).getValue)
 
+    @Input
+    def wingPosition(self):
+        """
+        Wing position, could be either "low" or "high" wing
+        :Unit: [ ]
+        :rtype: string
+        """
+        return 'low wing'
+
     #### Attributes ###
 
     @Attribute
@@ -147,7 +156,7 @@ class Aircraft(GeomBase):
         #lst.update(self.htpbase.outputList)
         return lst
 
-    #### Parts ####
+    # ### Parts ####
 
     @Part
     def wingbase(self):
@@ -162,7 +171,8 @@ class Aircraft(GeomBase):
                     cg=self.evaluations.cg,
                     ac=self.evaluations.ac,
                     noseLength=self.fuselage.noseLength,
-                    cylinderLength=self.fuselage.cylinderLength)
+                    cylinderLength=self.fuselage.cylinderLength,
+                    wingPosition=self.wingPosition)
 
     @Part
     def fuselage(self):
