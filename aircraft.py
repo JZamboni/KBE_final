@@ -4,10 +4,7 @@ from parapy.core import *
 from Handler.importer import Importer
 from Handler.outporter import Outporter
 from Input import Files
-from math import *
-import Tkinter
-import tkMessageBox
-from tkMessageBox import *
+from Output import STEP
 from Main.Wing.wing import Wing
 from Main.Fuselage.fuselage import Fuselage
 from Main.Engine.engine import Engine
@@ -17,6 +14,7 @@ from Main.LandingGear.landingGear import LandingGear
 from Main.Analysis.evaluations import Evaluations
 import tkFileDialog
 import os
+from parapy.exchange.step import STEPWriter
 
 #ToDo: se il fuselage viene accorciato o rimpicciolito troppo va tutto a puttane... si deve assolutamente trovare una soluzione
 class Aircraft(GeomBase):
@@ -160,6 +158,10 @@ class Aircraft(GeomBase):
     def outputResult(self):
         return Outporter(ListValues=self.listValues,
                          Path=self.filePath).writeValues()
+
+    @Attribute
+    def outputSTEP(self):
+        return os.path.dirname(STEP.__file__)
 
     @Attribute
     def listValues(self):
@@ -339,6 +341,25 @@ class Aircraft(GeomBase):
                            wing=self.wingbase.rightWing,
                            enginePos=self.enginebase.enginePos,
                            filePath=self.filePath)
+
+    @Part
+    def node_writer(self):
+        return STEPWriter(nodes=[self.fuselage.loft,
+                                 self.wingbase.leftWing,
+                                 self.wingbase.rightWing,
+                                 self.vtpbase.tail,
+                                 self.htpbase.leftTail,
+                                 self.htpbase.rightTail,
+                                 self.enginebase.engineRight[0],
+                                 self.enginebase.engineLeft[0],
+                                 self.landingGear.noseWheel,
+                                 self.landingGear.noseHub,
+                                 self.landingGear.wheel,
+                                 self.landingGear.hub,
+                                 self.landingGear.wheelLeft,
+                                 self.landingGear.hubLeft],
+                          default_directory=self.outputSTEP)
+
 
 
 if __name__ == '__main__':

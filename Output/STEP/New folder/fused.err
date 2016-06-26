@@ -1,0 +1,23 @@
+
+
+
+          SolidWorks Corporation - STEP Processor Error Log
+          ______________________________________________________
+
+                       STEP Post Processor
+                       ___________________
+
+
+STEP File Name: C:\Users\Jacopo\Desktop\Academic\GitHub\KBE_final\Output\STEP\fused.stp
+
+
+Reversing curve, low: 0, high: 0
+Bad Curve, low: -1, high: -1
+Reversing curve, low: 0, high: 0
+Bad Curve, low: -1, high: -1
+XLTR: Circuit sanity failure
+WARNING: Surface problem...Invalid combination of loops on surface.
+Surfaces successfully processed into a solid body.
+STEP-in completed.
+Error: Unable to create solid from trimmed surfaces.
+STEP-in did not complete successfully.
