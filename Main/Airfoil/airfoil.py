@@ -16,7 +16,6 @@ class Airfoil(GeomBase):
     window = Tk()
     window.wm_withdraw()
 
-
     # ### Input required from wing/tail planes ###################################################################
 
     if __name__ == '__main__':  # permit the modification of the input only when running from wing

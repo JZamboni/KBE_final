@@ -22,6 +22,8 @@ class Aircraft(GeomBase):
     Basic class Aircraft
     """
 
+    # ### Inputs #####################################################################################################
+
     @Input
     def projectName(self):
         """
@@ -102,9 +104,9 @@ class Aircraft(GeomBase):
         """
 
         return str(Importer(Component='Configuration',
-                              VariableName='Tail type',
-                              Default='T tail',
-                              Path=self.filePath).getValue)
+                            VariableName='Tail type',
+                            Default='T tail',
+                            Path=self.filePath).getValue)
 
     @Input
     def nEngine(self):
@@ -142,11 +144,12 @@ class Aircraft(GeomBase):
                             Default='low wing',
                             Path=self.filePath).getValue)
 
-    # ### Attributes ###
+    # ### Attributes ##################################################################################################
 
     @Attribute
     def filePath(self):
-        """Returns an opened file in read mode.
+        """
+        Returns an opened file in read mode.
         This time the dialog just returns a filename and the file is opened by your own code.
         """
         defaultPath = os.path.dirname(Files.__file__)
@@ -160,15 +163,24 @@ class Aircraft(GeomBase):
 
     @Attribute
     def outputResult(self):
+        """
+        Trigger the creation of the output file
+        """
         return Outporter(ListValues=self.listValues,
                          Path=self.filePath).writeValues()
 
     @Attribute
     def outputSTEP(self):
+        """
+        Trigger the creation of the STEP file
+        """
         return os.path.dirname(STEP.__file__)
 
     @Attribute
     def listValues(self):
+        """
+        List of elements to write the output file of the aircraft, divided in inputs and attributes
+        """
         lst = {}
         configuration = {
             "Configuration":
@@ -215,10 +227,13 @@ class Aircraft(GeomBase):
         lst.update(self.wingbase.outputList)
         return lst
 
-    # ### Parts ####
+    # ### Parts ######################################################################################################
 
     @Part
     def wingbase(self):
+        """
+        Wing element of the aircraft
+        """
         return Wing(maCruise=self.maCruise,
                     fuselageLength=self.fuselage.fuselageLength,
                     fuselageDiameter=self.fuselage.fuselageDiameter,
@@ -235,11 +250,17 @@ class Aircraft(GeomBase):
 
     @Part
     def fuselage(self):
+        """
+        Fuselage element of the aircraft
+        """
         return Fuselage(maCruise=self.maCruise,
                         filePath=self.filePath)
 
     @Part
     def enginebase(self):
+        """
+        Engine element of the aircraft
+        """
         return Engine(fuselageLength=self.fuselage.fuselageLength,
                       fuselageDiameter=self.fuselage.fuselageDiameter,
                       noseLength=self.fuselage.noseLength,
@@ -261,6 +282,9 @@ class Aircraft(GeomBase):
 
     @Part
     def vtpbase(self):
+        """
+        Vertical tail plane element of the aircraft
+        """
         return Vtp(tailType=self.tailType,
                    surfaceWing=self.wingbase.surface,
                    cMACWing=self.wingbase.cMAC,
@@ -277,6 +301,9 @@ class Aircraft(GeomBase):
 
     @Part
     def htpbase(self):
+        """
+        Horizontal tail plane element of the aircraft
+        """
         return Htp(tailType=self.tailType,
                    sweep25Wing=self.wingbase.sweep25,
                    surfaceWing=self.wingbase.surface,
@@ -303,6 +330,9 @@ class Aircraft(GeomBase):
 
     @Part
     def landingGear(self):
+        """
+        Landing Gear element of the aircraft
+        """
         return LandingGear(filePath=self.filePath,
                            wingPosition=self.wingbase.wingPosition,
                            fuselageDiameter=self.fuselage.fuselageDiameter,
@@ -317,6 +347,9 @@ class Aircraft(GeomBase):
 
     @Part
     def evaluations(self):
+        """
+        Class to evaluate aircraft lift gradient, downwash gradient, aerodynamic center, center of gravity
+        """
         return Evaluations(maCruise=self.maCruise,
                            tailType=self.tailType,
                            vertPosW=self.wingbase.vertPos,
@@ -347,6 +380,9 @@ class Aircraft(GeomBase):
 
     @Part
     def node_writer(self):
+        """
+        STEP writer to allow importation in a CAD software of aircraft designed, showed in the GUI
+        """
         return STEPWriter(nodes=[self.fuselage.loft,
                                  self.wingbase.leftWing,
                                  self.wingbase.rightWing,
@@ -362,7 +398,6 @@ class Aircraft(GeomBase):
                                  self.landingGear.wheelLeft,
                                  self.landingGear.hubLeft],
                           default_directory=self.outputSTEP)
-
 
 
 if __name__ == '__main__':
