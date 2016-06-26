@@ -13,7 +13,6 @@ from Input import Airfoils
 from Handler.importer import Importer
 import Tkinter, Tkconstants, tkFileDialog
 
-#ToDO: la coda esce leggermente dal fuselage a cuasa del suo sweep
 
 class Vtp(GeomBase):
     """
@@ -328,8 +327,6 @@ class Vtp(GeomBase):
         :Unit: [m]
         :rtype: float
         """
-
-        # TODO: la vertical e veramente enorme... la scia si trova nella posizione corretta?
 
         if self.tailType == 'conventional':
             tl = self.tlH - 1.5 * self.crH  # first guess for vertical tail arm

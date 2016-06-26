@@ -288,7 +288,7 @@ class Fuselage(GeomBase):
             showwarning("Warning", "The length of fuselage cylindrical part is negative."
                                    " Try to increment fuselage length or reduce fuselage diameter.")
         else:
-            return cylL
+            return cylL * 1.005
 
     @Attribute
     def cylinderSectionRadius(self):

@@ -18,7 +18,7 @@ class LandingGear(GeomBase):
         Visualize checks for positioning.
         :type: boolean
         :return:
-        """ #ToDo: add another check for the lateral control in order to split the work
+        """
         return False
 
     @Input
@@ -31,7 +31,7 @@ class LandingGear(GeomBase):
         return float(Importer(Component='Landing Gear',
                               VariableName='Landing gear height',
                               Default=1.6,
-                              Path=self.filePath).getValue) #ToDo: per value = 0 la ruota interseca il corpo dell'aereo
+                              Path=self.filePath).getValue)
 
     @Input
     def longPos(self):
@@ -277,7 +277,7 @@ class LandingGear(GeomBase):
             piano = Plane(reference=rotationPoint, normal=Vector(-sin(radians(lateral)), cos(radians(lateral)), 0))
             intShape = IntersectedShapes(shape_in=self.fusedWE, tool=piano)
             int = intShape.edges
-            lateral += self.tipbackPrecision #ToDo: la precisione del tpack e settabile. va bene?
+            lateral += self.tipbackPrecision
 
         return lateral
 
@@ -310,9 +310,8 @@ class LandingGear(GeomBase):
 
             piano = Plane(reference=rotationPoint, normal=Vector(0, cos(radians(tipback)), -sin(radians(tipback))))
             int_shape = IntersectedShapes(shape_in=self.fuselage, tool=piano)
-            #ToDo: mettendeo self.fusedFH si cotrolla anche se tocca la coda. E molto pesante.
             int = int_shape.edges
-            tipback += self.tipbackPrecision #ToDo: la precisione del tpack e settabile. va bene?
+            tipback += self.tipbackPrecision
         return tipback
 
     @Attribute

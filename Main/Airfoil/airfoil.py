@@ -68,7 +68,6 @@ class Airfoil(GeomBase):
 
         :rtype: collections.Sequence
         """
-        # ToDo: find a smarter way to do this linked to the previous points
         with open(self.airfoilData, 'r') as datafile:  # this statement
             # automatically closes the data file at the end of the code block.
             points = []
