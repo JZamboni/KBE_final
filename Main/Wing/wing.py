@@ -1,5 +1,5 @@
 from __future__ import division
-import os, sys
+import os
 from parapy.geom import *
 from parapy.core import *
 from math import *
@@ -11,10 +11,9 @@ from Input import Airfoils
 from Main.Wing.wake import Wake
 from Handler.xFoil import Xfoil
 from Handler.importer import Importer
-from parapy.lib.cst import points_to_cst
-import Tkinter, Tkconstants, tkFileDialog
+import tkFileDialog
 
-#ToDo: cambiare tutti gli input settable to attribute because of Palermo
+
 class Wing(GeomBase):
     """
     Basic class Wing
@@ -297,15 +296,15 @@ class Wing(GeomBase):
 
             return self.defaultPath
         else:
-            def callback():
-                name = askopenfilename()
-                return name
-
-            filePath = callback()
-            errmsg = 'Error!'
-            Button(text='File Open', command=callback).pack(fill=X)
-
-            return str(filePath)
+            showwarning("Airfoil root selection", "Please choose ROOT airfoil")
+            defaultPath = os.path.dirname(Airfoils.__file__)
+            defaultFile = os.path.dirname(Airfoils.__file__) + '\NACA_0012.dat'
+            file_opt = options = {}
+            options['initialdir'] = defaultPath
+            options['initialfile'] = defaultFile
+            # get filename
+            filename = tkFileDialog.askopenfilename(**file_opt)
+            return str(filename)
 
     @Attribute
     def airfoilTip(self):
@@ -319,15 +318,15 @@ class Wing(GeomBase):
 
             return self.defaultPath
         else:
-            def callback():
-                name = askopenfilename()
-                return name
-
-            filePath = callback()
-            errmsg = 'Error!'
-            Button(text='File Open', command=callback).pack(fill=X)
-
-            return str(filePath)
+            showwarning("Airfoil tip selection", "Please choose TIP airfoil")
+            defaultPath = os.path.dirname(Airfoils.__file__)
+            defaultFile = os.path.dirname(Airfoils.__file__) + '\NACA_0012.dat'
+            file_opt = options = {}
+            options['initialdir'] = defaultPath
+            options['initialfile'] = defaultFile
+            # get filename
+            filename = tkFileDialog.askopenfilename(**file_opt)
+            return str(filename)
 
     @Attribute
     def cylinderFraction(self):
@@ -689,14 +688,6 @@ class Wing(GeomBase):
                                                    self.vertPos + self.span/2 * tan(radians(self.dihedral)),
                                                    self.longPos + self.span/2 * tan(radians(self.sweepLE))),
                                hidden=True)
-
-#    @Part
-#    def curveRootPos2(self):
-#        return TransformedCurve(curve_in=self.curveRoot.crv,
-#                                from_position=self.curveRoot.position,
-#                                to_position=translate(self.curveTip.position,
-#                                                      'z', self.longPos,
-#                                                      'y', self.vertPos))
 
     @Part
     def rightWing(self):

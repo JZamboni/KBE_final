@@ -130,6 +130,17 @@ class Engine(GeomBase):
                               Default=-0.15,
                               Path=self.filePath).getValue)
 
+    @Input
+    def fusVertPos(self):
+        """
+        Vertical position on fuselage wrt to the fuselage diameter.
+        :return:
+        """
+        return float(Importer(Component='Engine',
+                              VariableName='Engine vertical pos on fuselage',
+                              Default=0.01,
+                              Path=self.filePath).getValue)
+
     window = Tk()
     window.wm_withdraw()
 
@@ -556,8 +567,6 @@ class Engine(GeomBase):
         :Unit: [m]
         :rtype:
         """
-        # ToDo: mettere un ulteriore if che eviti l'intersezione tra ala e nacelle
-        #ToDo: la posizione vertical del motore e' hardcoded.
         if self.enginePos == 'wing' and -0.2 < self.engineStagger < 0.18:
             if self.nEngine == 2 and self.enginePos == 'wing':
                 return [-1 * (0.07 + 0.03 * cos(15 * (self.engineStagger + 0.03)) + self.tcRatio / 4) * self.chord35 +
@@ -577,7 +586,7 @@ class Engine(GeomBase):
                         (-1 * 0.04 - self.tcRatio / 4) * self.chord70 + self.wingVertPos-self.nacelleDiameter/2 +
                         tan(radians(self.dihedral)) * self.latPos[1]]
         elif self.enginePos == 'fuselage':
-            return [0.0]
+            return [self.fusVertPos * self.fuselageDiameter / 2]
         else:
             print "Choose a value for engineStagger larger than -0.2"
 
@@ -617,7 +626,8 @@ class Engine(GeomBase):
                         "Mechanical efficiency": {"value": self.etaMech, "unit": ""},
                         "Cowling type": {"value": self.cowlingType, "unit": ""},
                         "Cowling position": {"value": self.cowlingPos, "unit": ""},
-                        "Engine-LE stagger": {"value": self.engineStagger, "unit": ""}
+                        "Engine-LE stagger": {"value": self.engineStagger, "unit": ""},
+                        "Engine vertical pos on fuselage": {"value": self.fusVertPos, "unit": ""}
                     },
                     "Attributes": {
                         "Engine thrust at Take-Off": {"value": self.thrustTO, "unit": "N"},
