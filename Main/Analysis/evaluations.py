@@ -572,12 +572,12 @@ class Evaluations(GeomBase):
                         "Htp airfoil efficiency factor": {"value": self.airfoilEffT, "unit": ""}},
                     "Attributes":{
                         "CG position": {"value": self.cg, "unit": "m"},
-                        "AC wing position": {"value": self.acW, "unit": "m"},
-                        "AC wing position": {"value": self.acW, "unit": "m"},
+                        "AC wing position": {"value": self.acW, "unit": "m"}
                     }
 
                  }
         }
+        #ToDo: da completare
         lst.update(inputs)
         return lst
 
