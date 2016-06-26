@@ -114,15 +114,15 @@
                }, 
                "Aircraft-less-tail AC position": {
                     "unit": "m", 
-                    "value": 12.99217035600339
+                    "value": 12.992175236008412
                }, 
                "Aircraft-less-tail CG position": {
                     "unit": "m", 
-                    "value": 13.527548785117165
+                    "value": 13.527546110460095
                }, 
                "Fuselage-Wing lift gradient": {
                     "unit": "1/rad", 
-                    "value": 7.123117464909813
+                    "value": 7.123113803950134
                }, 
                "Htp lift curve slope": {
                     "unit": "1/rad", 
@@ -130,11 +130,11 @@
                }, 
                "Wing downwash gradient on htp": {
                     "unit": "", 
-                    "value": 0.2642993166750043
+                    "value": 0.2642999877708987
                }, 
                "Wing exposed surface": {
                     "unit": "m^2", 
-                    "value": 70.855244263223
+                    "value": 70.85585342765353
                }, 
                "Wing lift curve slope": {
                     "unit": "1/rad", 
@@ -142,7 +142,7 @@
                }, 
                "Wing wetted surface": {
                     "unit": "m^2", 
-                    "value": 77.42796672630782
+                    "value": 77.42862475537672
                }
           }, 
           "Inputs": {
@@ -202,31 +202,31 @@
           "Attributes": {
                "Horizontal tail Mean Aerodynamic Chord": {
                     "unit": "m", 
-                    "value": 2.249256838343124
+                    "value": 2.2492591659619707
                }, 
                "Horizontal tail arm": {
                     "unit": "m", 
-                    "value": 18.822981109660095
+                    "value": 18.822987591705754
                }, 
                "Horizontal tail reference surface": {
                     "unit": "m^2", 
-                    "value": 22.4612321300384
+                    "value": 22.461278617583435
                }, 
                "Horizontal tail root chord": {
                     "unit": "m", 
-                    "value": 3.0278457439234363
+                    "value": 3.0278488772564995
                }, 
                "Horizontal tail span": {
                     "unit": "m", 
-                    "value": 10.597460103732026
+                    "value": 10.597471070397747
                }, 
                "Horizontal tail tip chord": {
                     "unit": "m", 
-                    "value": 1.2111382975693745
+                    "value": 1.2111395509026
                }, 
                "Horizontal tail volume coefficient": {
                     "unit": "", 
-                    "value": 1.4614596162464906
+                    "value": 1.461445957508175
                }, 
                "Htp aspect ratio": {
                     "unit": "", 
@@ -272,7 +272,7 @@
                }, 
                "Longitudinal pos of main gear": {
                     "unit": "m", 
-                    "value": 15.44274266217166
+                    "value": 15.442750710384157
                }, 
                "Longitudinal pos of nose gear": {
                     "unit": "m", 
@@ -284,7 +284,7 @@
                }, 
                "Maximum tipback angle": {
                     "unit": "deg", 
-                    "value": 28.01290146987139
+                    "value": 28.013034483594833
                }, 
                "Nose landing gear length": {
                     "unit": "m", 
@@ -343,7 +343,7 @@
                }, 
                "Wing loading": {
                     "unit": "kg / m^2", 
-                    "value": 5000.0
+                    "value": 509.68
                }
           }
      }, 
@@ -355,7 +355,7 @@
                }, 
                "Vertical tail Mean Aerodynamic Chord": {
                     "unit": "m", 
-                    "value": 3.519671602993054
+                    "value": 3.5196780716131424
                }, 
                "Vertical tail arm": {
                     "unit": "m", 
@@ -363,23 +363,23 @@
                }, 
                "Vertical tail reference surface": {
                     "unit": "m^2", 
-                    "value": 16.382042173094046
+                    "value": 16.38210238854391
                }, 
                "Vertical tail root chord": {
                     "unit": "m", 
-                    "value": 4.09824775690972
+                    "value": 4.098255288864618
                }, 
                "Vertical tail span": {
                     "unit": "m", 
-                    "value": 4.702739301053904
+                    "value": 4.70274794397215
                }, 
                "Vertical tail tip chord": {
                     "unit": "m", 
-                    "value": 2.868773429836804
+                    "value": 2.868778702205233
                }, 
                "Vertical tail volume coefficient": {
                     "unit": "", 
-                    "value": 0.10398125220962032
+                    "value": 0.10398041159174197
                }, 
                "Vtp aspect ratio": {
                     "unit": "", 
@@ -413,7 +413,7 @@
                }, 
                "Aircraft Reynolds number": {
                     "unit": "", 
-                    "value": 22317699.282295953
+                    "value": 22317786.768191557
                }, 
                "Aircraft speed at cruise altitude": {
                     "unit": "m/s", 
@@ -429,7 +429,7 @@
                }, 
                "Lift coefficient of aircraft in cruise condition": {
                     "unit": "", 
-                    "value": 0.456398438607752
+                    "value": 0.046523431237919806
                }, 
                "Static density at cruise altitude": {
                     "unit": "kg/m^3", 
@@ -453,7 +453,7 @@
                }, 
                "Wing Mean Aerodynamic Chord": {
                     "unit": "m", 
-                    "value": 3.4218389341942466
+                    "value": 3.42185234788174
                }, 
                "Wing average thickness to chord ratio": {
                     "unit": "", 
@@ -469,15 +469,15 @@
                }, 
                "Wing reference surface": {
                     "unit": "m^2", 
-                    "value": 84.5426
+                    "value": 84.54326281918048
                }, 
                "Wing root chord": {
                     "unit": "m", 
-                    "value": 4.746362247547066
+                    "value": 4.746380853396478
                }, 
                "Wing span": {
                     "unit": "m", 
-                    "value": 26.806941265276798
+                    "value": 26.807046349104446
                }, 
                "Wing taper ratio": {
                     "unit": "", 
@@ -485,7 +485,7 @@
                }, 
                "Wing tip chord": {
                     "unit": "m", 
-                    "value": 1.561153344282769
+                    "value": 1.5611594640398625
                }
           }, 
           "Inputs": {
