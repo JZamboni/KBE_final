@@ -708,6 +708,15 @@ class Wing(GeomBase):
         return LoftedSolid([self.curveRootPos, self.curveTipPos])
 
     @Part
+    def solidWing(self):
+        """
+        Right wing solid representation
+
+        :rtype:
+        """
+        return Solid(self.rightWing)
+
+    @Part
     def leftWing(self):
         """
         Left wing solid representation
