@@ -39,50 +39,6 @@ class Htp(GeomBase):
         """
         return False
 
-    @Attribute
-    def airfoilRoot(self):
-        """
-        Path to airfoil file for wing root. It can either use a default path or letting the user choose the airfoil file
-
-        :rtype: string
-        """
-
-        if not self.newAirfoil:
-
-            return self.defaultPath
-        else:
-            def callback():
-                name = askopenfilename()
-                return name
-
-            filePath = callback()
-            errmsg = 'Error!'
-            Button(text='File Open', command=callback).pack(fill=X)
-
-            return str(filePath)
-
-    @Attribute
-    def airfoilTip(self):
-        """
-        Path to airfoil file for wing tip. It can either use a default path or letting the user choose the airfoil file.
-
-        :rtype: string
-        """
-
-        if not self.newAirfoil:
-
-            return self.defaultPath
-        else:
-            def callback():
-                name = askopenfilename()
-                return name
-
-            filePath = callback()
-            errmsg = 'Error!'
-            Button(text='File Open', command=callback).pack(fill=X)
-
-            return str(filePath)
-
     @Input
     def hVertPerc(self):
         """
@@ -429,6 +385,50 @@ class Htp(GeomBase):
         return self.posFraction * self.fuselageLength
 
     @Attribute
+    def airfoilRoot(self):
+        """
+        Path to airfoil file for wing root. It can either use a default path or letting the user choose the airfoil file
+
+        :rtype: string
+        """
+
+        if not self.newAirfoil:
+
+            return self.defaultPath
+        else:
+            def callback():
+                name = askopenfilename()
+                return name
+
+            filePath = callback()
+            errmsg = 'Error!'
+            Button(text='File Open', command=callback).pack(fill=X)
+
+            return str(filePath)
+
+    @Attribute
+    def airfoilTip(self):
+        """
+        Path to airfoil file for wing tip. It can either use a default path or letting the user choose the airfoil file.
+
+        :rtype: string
+        """
+
+        if not self.newAirfoil:
+
+            return self.defaultPath
+        else:
+            def callback():
+                name = askopenfilename()
+                return name
+
+            filePath = callback()
+            errmsg = 'Error!'
+            Button(text='File Open', command=callback).pack(fill=X)
+
+            return str(filePath)
+
+    @Attribute
     def tlDecrement(self):
         """
         Tail arm decrement
@@ -594,6 +594,29 @@ class Htp(GeomBase):
             return "Orange"
         else:
             return "Yellow"
+
+    @Attribute
+    def outputList(self):
+        lst = {}
+        inputs ={
+            "Htp":
+                {
+                 "Horizontal height of htp in percentage of vtp": {"value": self.hVertPerc, "unit": ""},
+                 "Htp aspect ratio": {"value": self.aspectRatio, "unit": ""},
+                 "Htp taper ratio": {"value": self.taperRatio, "unit": ""},
+                 "Htp sweep at quarter chord": {"value": self.sweep25, "unit": "deg"},
+                 "Horizontal tail volume coefficient": {"value": self.vc, "unit": ""},
+                 "Span percentage for xFoil analysis": {"value": self.percxfoil, "unit": ""},
+                 "Horizontal tail arm": {"value": self.tl, "unit": "m"},
+                 "Horizontal tail reference surface": {"value": self.surface, "unit": "m^2"},
+                 "Horizontal tail span": {"value": self.span, "unit": "m"},
+                 "Horizontal tail root chord": {"value": self.chordRoot, "unit": "m"},
+                 "Horizontal tail tip chord": {"value": self.chordTip, "unit": "m"},
+                 "Horizontal tail Mean Aerodynamic Chord": {"value": self.cMAC, "unit": "m"}
+                 }
+        }
+        lst.update(inputs)
+        return lst
 
     # ###### Parts ####################################################################################################
 

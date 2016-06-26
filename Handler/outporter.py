@@ -8,7 +8,7 @@ from tkMessageBox import *
 class Outporter:
 
 
-    def __init__(self, ListValues, Path = []):
+    def __init__(self, ListValues, Path):
         self.listValues = ListValues
         self.filePath = Path
 
