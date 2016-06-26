@@ -598,20 +598,28 @@ class Engine(GeomBase):
     @Attribute
     def outputList(self):
         lst = {}
+
         inputs = {
             "Engine":
                 {
-                    "Engine bypass ratio": {"value": self.bypassRatio, "unit": ""},
-                    "Speed of sound at sea level": {"value": self.a0, "unit": "m/s"},
-                    "Air density at sea level": {"value": self.rho0, "unit": "kg/m^3"},
-                    "Temperature at Inlet of Turbine": {"value": self.TIT, "unit": "K"},
-                    "Nozzle efficiency": {"value": self.etaNozzle, "unit": ""},
-                    "Mechanical efficiency": {"value": self.etaMech, "unit": ""},
-                    "Cowling type": {"value": self.cowlingType, "unit": ""},
-                    "Cowling position": {"value": self.cowlingPos, "unit": ""},
-                    "Engine-LE stagger": {"value": self.engineStagger, "unit": ""}
+                    "Inputs": {
+                        "Engine bypass ratio": {"value": self.bypassRatio, "unit": ""},
+                        "Speed of sound at sea level": {"value": self.a0, "unit": "m/s"},
+                        "Air density at sea level": {"value": self.rho0, "unit": "kg/m^3"},
+                        "Temperature at Inlet of Turbine": {"value": self.TIT, "unit": "K"},
+                        "Nozzle efficiency": {"value": self.etaNozzle, "unit": ""},
+                        "Mechanical efficiency": {"value": self.etaMech, "unit": ""},
+                        "Cowling type": {"value": self.cowlingType, "unit": ""},
+                        "Cowling position": {"value": self.cowlingPos, "unit": ""},
+                        "Engine-LE stagger": {"value": self.engineStagger, "unit": ""}
+                    },
+                    "Attributes": {
+                        "Ciao": {"value": self.airfoilEffW, "unit": ""}
+                    }
+
                 }
-            }
+        }
+
         lst.update(inputs)
         return lst
 
