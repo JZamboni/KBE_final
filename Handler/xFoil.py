@@ -181,7 +181,6 @@ class Xfoil(GeomBase):
         lst = []
         for edges in self.airfoil.edges:
             lst.extend(edges.equispaced_points(100))
-            #self.airfoil.edges[0].equispaced_points(100)
         return lst
 
     @Attribute
