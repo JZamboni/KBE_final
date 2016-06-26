@@ -333,10 +333,12 @@ class Vtp(GeomBase):
         # TODO: la vertical e veramente enorme... la scia si trova nella posizione corretta?
 
         if self.tailType == 'conventional':
-            tl = self.tlH / 2.  # first guess for vertical tail arm
+            tl = self.tlH - 1.5 * self.crH  # first guess for vertical tail arm
             check = 0.  # first guess for the rudder area check, to start the cycle
-            while check < 2/3:
+            iter = 0.  # check on number of iteration
+            while check < 0.66 and iter < 1500:
                 tl = tl + self.tlDecrement
+                iter += 1.
                 calctail = VtpCalc(tl=tl,
                                    rcr=self.rcr,
                                    vc=self.vc,
@@ -351,6 +353,8 @@ class Vtp(GeomBase):
                                    longPosH=self.longPosH,
                                    vertPosH=self.vertPosH)
                 check = calctail.rudderBlanketed  # portion of the rudder blanketed
+            if iter == 1500:
+                showwarning("Warning", "The evaluation process for the vertical tail arm has not converged")
             return tl
         else:
             tl = self.fuselageLength  # first guess for tail arm
