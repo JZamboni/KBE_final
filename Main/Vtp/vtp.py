@@ -10,6 +10,7 @@ from Main.Airfoil.airfoil import Airfoil
 from Handler.vtpCalc import VtpCalc
 from Handler.xFoil import Xfoil
 from Input import Airfoils
+from Handler.importer import Importer
 import Tkinter, Tkconstants, tkFileDialog
 
 #ToDO: la coda esce leggermente dal fuselage a cuasa del suo sweep
@@ -39,50 +40,6 @@ class Vtp(GeomBase):
         """
         return False
 
-    @Attribute
-    def airfoilRoot(self):
-        """
-        Path to airfoil file for wing root. It can either use a default path or letting the user choose the airfoil file
-
-        :rtype: string
-        """
-
-        if not self.newAirfoil:
-
-            return self.defaultPath
-        else:
-            def callback():
-                name = askopenfilename()
-                return name
-
-            filePath = callback()
-            errmsg = 'Error!'
-            Button(text='File Open', command=callback).pack(fill=X)
-
-            return str(filePath)
-
-    @Attribute
-    def airfoilTip(self):
-        """
-        Path to airfoil file for wing tip. It can either use a default path or letting the user choose the airfoil file.
-
-        :rtype: string
-        """
-
-        if not self.newAirfoil:
-
-            return self.defaultPath
-        else:
-            def callback():
-                name = askopenfilename()
-                return name
-
-            filePath = callback()
-            errmsg = 'Error!'
-            Button(text='File Open', command=callback).pack(fill=X)
-
-            return str(filePath)
-
     @Input
     def rcr(self):
         """
@@ -91,7 +48,10 @@ class Vtp(GeomBase):
         :rtype: float
         source: Raymer
         """
-        return .35
+        return float(Importer(Component='Vtp',
+                              VariableName='fuselageLength',
+                              Default=.35,
+                              Path=self.filePath).getValue)
 
     @Input
     def aspectRatio(self):
@@ -164,7 +124,10 @@ class Vtp(GeomBase):
         :Unit: [ ]
         :rtype: float
         """
-        return .5
+        return float(Importer(Component='Vtp',
+                              VariableName='Span percentage for xFoil analysis',
+                              Default=.5,
+                              Path=self.filePath).getValue)
 
     window = Tk()
     window.wm_withdraw()
@@ -304,6 +267,50 @@ class Vtp(GeomBase):
         :rtype: float
         """
         return self.posFraction * self.fuselageLength
+
+    @Attribute
+    def airfoilRoot(self):
+        """
+        Path to airfoil file for wing root. It can either use a default path or letting the user choose the airfoil file
+
+        :rtype: string
+        """
+
+        if not self.newAirfoil:
+
+            return self.defaultPath
+        else:
+            def callback():
+                name = askopenfilename()
+                return name
+
+            filePath = callback()
+            errmsg = 'Error!'
+            Button(text='File Open', command=callback).pack(fill=X)
+
+            return str(filePath)
+
+    @Attribute
+    def airfoilTip(self):
+        """
+        Path to airfoil file for wing tip. It can either use a default path or letting the user choose the airfoil file.
+
+        :rtype: string
+        """
+
+        if not self.newAirfoil:
+
+            return self.defaultPath
+        else:
+            def callback():
+                name = askopenfilename()
+                return name
+
+            filePath = callback()
+            errmsg = 'Error!'
+            Button(text='File Open', command=callback).pack(fill=X)
+
+            return str(filePath)
 
     @Attribute
     def tlDecrement(self):
@@ -511,6 +518,37 @@ class Vtp(GeomBase):
                 Point(0, self.curveTipPos.position.location.y, self.curveTipPos.position.location.z + self.chordTip),
                 Point(0, self.vertPos, self.longPos + self.chordRoot),
                 Point(0, self.vertPos, self.longPos + (1-self.rcr)*self.chordRoot)]
+
+    @Attribute
+    def outputList(self):
+        lst = {}
+        inputs ={
+            "Vtp":
+                {
+                    "Inputs":
+                        {
+                            "Rudder chord ratio over root chord": {"value": self.rcr, "unit": ""},
+                            "Span percentage for xFoil analysis": {"value": self.percxfoil, "unit": ""}
+                        },
+                    "Attributes":
+                        {
+                            "Vertical tail arm": {"value": self.tl, "unit": "m"},
+                            "Vertical tail volume coefficient": {"value": self.vc, "unit": ""},
+                            "Vtp sweep at quarter chord": {"value": self.sweep25, "unit": "deg"},
+                            "Vtp taper ratio": {"value": self.taperRatio, "unit": ""},
+                            "Vtp aspect ratio": {"value": self.aspectRatio, "unit": ""},
+                            "Vertical tail reference surface": {"value": self.surface, "unit": "m^2"},
+                            "Vertical tail span": {"value": self.span, "unit": "m"},
+                            "Vertical tail root chord": {"value": self.chordRoot, "unit": "m"},
+                            "Vertical tail tip chord": {"value": self.chordTip, "unit": "m"},
+                            "Vertical tail Mean Aerodynamic Chord": {"value": self.cMAC, "unit": "m"},
+                            "Percentage of rudder area free from Htp wake": {"value": self.rudderFree, "unit": ""}
+                        }
+
+                 }
+        }
+        lst.update(inputs)
+        return lst
 
     # ###### Parts ####################################################################################################
 
