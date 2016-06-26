@@ -403,15 +403,15 @@ class Htp(GeomBase):
 
             return self.defaultPath
         else:
-            def callback():
-                name = askopenfilename()
-                return name
-
-            filePath = callback()
-            errmsg = 'Error!'
-            Button(text='File Open', command=callback).pack(fill=X)
-
-            return str(filePath)
+            showwarning("Airfoil root selection", "Please choose ROOT airfoil")
+            defaultPath = os.path.dirname(Airfoils.__file__)
+            defaultFile = os.path.dirname(Airfoils.__file__) + '\NACA_0012.dat'
+            file_opt = options = {}
+            options['initialdir'] = defaultPath
+            options['initialfile'] = defaultFile
+            # get filename
+            filename = tkFileDialog.askopenfilename(**file_opt)
+            return str(filename)
 
     @Attribute
     def airfoilTip(self):
@@ -425,15 +425,15 @@ class Htp(GeomBase):
 
             return self.defaultPath
         else:
-            def callback():
-                name = askopenfilename()
-                return name
-
-            filePath = callback()
-            errmsg = 'Error!'
-            Button(text='File Open', command=callback).pack(fill=X)
-
-            return str(filePath)
+            showwarning("Airfoil tip selection", "Please choose TIP airfoil")
+            defaultPath = os.path.dirname(Airfoils.__file__)
+            defaultFile = os.path.dirname(Airfoils.__file__) + '\NACA_0012.dat'
+            file_opt = options = {}
+            options['initialdir'] = defaultPath
+            options['initialfile'] = defaultFile
+            # get filename
+            filename = tkFileDialog.askopenfilename(**file_opt)
+            return str(filename)
 
     @Attribute
     def tlDecrement(self):
