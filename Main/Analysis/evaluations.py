@@ -602,7 +602,6 @@ class Evaluations(GeomBase):
 
                  }
         }
-        #ToDo: da completare
         lst.update(inputs)
         return lst
 

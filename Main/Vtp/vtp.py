@@ -319,7 +319,6 @@ class Vtp(GeomBase):
         :Unit: [m]
         :rtype: float
         """
-        # TODO: creare la funzione esponenziale
         return .0001 * self.fuselageLength
 
     @Attribute
