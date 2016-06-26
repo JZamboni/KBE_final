@@ -700,14 +700,6 @@ class Wing(GeomBase):
                                                    self.longPos + self.span/2 * tan(radians(self.sweepLE))),
                                hidden=True)
 
-#    @Part
-#    def curveRootPos2(self):
-#        return TransformedCurve(curve_in=self.curveRoot.crv,
-#                                from_position=self.curveRoot.position,
-#                                to_position=translate(self.curveTip.position,
-#                                                      'z', self.longPos,
-#                                                      'y', self.vertPos))
-
     @Part
     def rightWing(self):
         """
