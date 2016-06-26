@@ -11,6 +11,7 @@ from Input import Airfoils
 from Main.Wing.wake import Wake
 from Handler.xFoil import Xfoil
 from Handler.importer import Importer
+from parapy.lib.cst import points_to_cst
 import Tkinter, Tkconstants, tkFileDialog
 
 #ToDo: cambiare tutti gli input settable to attribute because of Palermo
@@ -141,6 +142,15 @@ class Wing(GeomBase):
                               VariableName='Span percentage for xFoil analysis',
                               Default=0.5,
                               Path=self.filePath).getValue)
+
+    @Input
+    def visc(self):
+        """
+        Trigger for viscous calculation in Q3D, 0 for inviscid and 1 for viscous analysis
+        :Unit: [ ]
+        :rtype: boolean
+        """
+        return 0
 
     window = Tk()
     window.wm_withdraw()
@@ -472,6 +482,68 @@ class Wing(GeomBase):
         return p0 * (1 - a * self.hCruise / T0)**(g / (R * a))
 
     @Attribute
+    def temperatureCruise(self):
+        """
+        Static temperature at cruise altitude
+        :Unit: [K]
+        :rtype: float
+        """
+        T0 = 288.15  # static temperature at sea level, [K]
+        a = 0.0065  # temperature gradient, [K/m]
+        if self.hCruise < 11000.:
+            return T0 - a * self.hCruise
+        else:
+            return 216.65
+
+    @Attribute
+    def densityCruise(self):
+        """
+        Static density at cruise altitude
+        :Unit: [kg/m^3]
+        :rtype: float
+        """
+        R = 287.  # specific gas constant, [J/kg K]
+        return self.pressureCruise / (R * self.temperatureCruise)
+
+    @Attribute
+    def viscosityCruise(self):
+        """
+        Static viscosity at cruise altitude, evaluated by Sutherland's law
+        :Unit: [ ]
+        :rtype: float
+        Source: http://www.cfd-online.com/Wiki/Sutherland's_law
+        """
+        Tref = 273.15  # reference temperature, [K]
+        Muref = 1.716e-5  # reference viscosity, [ ]
+        S = 110.4  # Sutherland temperature [K]
+        T = self.temperatureCruise
+        return Muref * (T / Tref)**1.5 * ((Tref + S) / (T + S))
+
+    @Attribute
+    def speedCruise(self):
+        """
+        Aircraft speed at cruise altitude
+        :Unit: [m/s]
+        :rtype: float
+        """
+        k = 1.4  # heat capacity ratio, [ ]
+        R = 287.  # specific gas constant, [J/kg K]
+        return self.maCruise * sqrt(k * R * self.temperatureCruise)
+
+    @Attribute
+    def re(self):
+        """
+        Aircraft Reynolds number evaluated at cruise altitude and speed, based on MAC
+        :Unit: [ ]
+        :rtype: float
+        """
+        rho = self.densityCruise
+        U = self.speedCruise
+        L = self.cMAC
+        mu = self.viscosityCruise
+        return (rho * U * L) / mu
+
+    @Attribute
     def dynamicPressure(self):
         """
         Dynamic pressure at aircraft speed and altitude
@@ -567,6 +639,11 @@ class Wing(GeomBase):
                             "Lift coefficient of aircraft in cruise condition": {"value": self.clCruise, "unit": ""},
                             "Wing average thickness to chord ratio": {"value": self.tcRatio, "unit": ""},
                             "Wing taper ratio": {"value": self.taperRatio, "unit": ""},
+                            "Static temperature at cruise altitude": {"value": self.temperatureCruise, "unit": "K"},
+                            "Static density at cruise altitude": {"value": self.densityCruise, "unit": "kg/m^3"},
+                            "Static viscosity at cruise altitude": {"value": self.viscosityCruise, "unit": ""},
+                            "Aircraft speed at cruise altitude": {"value": self.speedCruise, "unit": "m/s"},
+                            "Aircraft Reynolds number": {"value": self.re, "unit": ""},
                             "Wing position fraction of the fuselage": {"value": self.posFraction, "unit": ""}
                         }
 
