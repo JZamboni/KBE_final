@@ -26,8 +26,8 @@ class Aircraft(GeomBase):
 
     @Input
     def projectName(self):
-        return str(Importer(Component='Project',
-                              VariableName='name',
+        return str(Importer(Component='Configuration',
+                              VariableName='Aircraft name',
                               Default='Tail sizing',
                               Path=self.filePath).getValue)
 
@@ -39,7 +39,7 @@ class Aircraft(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Performance',
-                              VariableName='M cruise',
+                              VariableName='Cruise Mach number',
                               Default=0.77,
                               Path=self.filePath).getValue)
 
@@ -51,7 +51,7 @@ class Aircraft(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Performance',
-                              VariableName='Wing Loading',
+                              VariableName='Wing loading',
                               Default=5000.,
                               Path=self.filePath).getValue)
 
@@ -63,7 +63,7 @@ class Aircraft(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Performance',
-                              VariableName='MTOW',
+                              VariableName='Maximum takeoff weight',
                               Default=422713.,
                               Path=self.filePath).getValue)
 
@@ -87,7 +87,7 @@ class Aircraft(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Performance',
-                              VariableName='Cruise altitude',
+                              VariableName='Aircraft cruise altitude',
                               Default=10000.,
                               Path=self.filePath).getValue)
 
@@ -100,19 +100,19 @@ class Aircraft(GeomBase):
         """
 
         return str(Importer(Component='Configuration',
-                              VariableName='Tail Type',
+                              VariableName='Tail type',
                               Default='T tail',
                               Path=self.filePath).getValue)
 
     @Input
     def nEngine(self):
         """
-        Number of engine of the aircraft
+        Number of engines of the aircraft
         :Unit: [ ]
         :rtype: integer
         """
         return float(Importer(Component='Configuration',
-                              VariableName='nEngine',
+                              VariableName='Number of engines',
                               Default=2.,
                               Path=self.filePath).getValue)
 
@@ -124,18 +124,21 @@ class Aircraft(GeomBase):
         :rtype: float
         """
         return str(Importer(Component='Configuration',
-                            VariableName='engine Position',
+                            VariableName='Engine location',
                             Default='wing',
                             Path=self.filePath).getValue)
 
     @Input
     def wingPosition(self):
         """
-        Wing position, could be either "low" or "high" wing
+        Wing position, could be either "low wing" or "high wing"
         :Unit: [ ]
         :rtype: string
         """
-        return 'low wing'
+        return str(Importer(Component='Configuration',
+                            VariableName='Wing position',
+                            Default='low wing',
+                            Path=self.filePath).getValue)
 
     #### Attributes ###
 
@@ -161,11 +164,48 @@ class Aircraft(GeomBase):
     @Attribute
     def listValues(self):
         lst = {}
+        configuration = {
+            "Configuration":
+                {
+                    "Inputs":
+                        {
+                            "Aircraft name": {"value": self.projectName, "unit": ""},
+                            "Tail type": {"value": self.tailType, "unit": ""},
+                            "Number of engines": {"value": self.nEngine, "unit": ""},
+                            "Engine location": {"value": self.enginePos, "unit": ""},
+                            "Wing position": {"value": self.wingPosition, "unit": ""}
+                        },
+                    "Attributes":
+                        {
+                        }
+
+                }
+        }
+        lst.update(configuration)
+        performance = {
+            "Performance":
+                {
+                    "Inputs":
+                        {
+                            "Cruise Mach number": {"value": self.maCruise, "unit": ""},
+                            "Wing loading": {"value": self.wingLoading, "unit": "kg / m^2"},
+                            "Maximum takeoff weight": {"value": self.mTOW, "unit": "N"},
+                            "Aircraft cruise altitude": {"value": self.hCruise, "unit": "m"},
+                        },
+                    "Attributes":
+                        {
+                        }
+
+                }
+        }
+        lst.update(performance)
         lst.update(self.fuselage.outputList)
         lst.update(self.enginebase.outputList)
         lst.update(self.evaluations.outputList)
         lst.update(self.landingGear.outputList)
         lst.update(self.htpbase.outputList)
+        lst.update(self.vtpbase.outputList)
+        lst.update(self.wingbase.outputList)
         return lst
 
     # ### Parts ####

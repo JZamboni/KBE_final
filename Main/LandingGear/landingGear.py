@@ -29,7 +29,7 @@ class LandingGear(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Landing Gear',
-                              VariableName='height',
+                              VariableName='Landing gear height',
                               Default=1.6,
                               Path=self.filePath).getValue) #ToDo: per value = 0 la ruota interseca il corpo dell'aereo
 
@@ -42,7 +42,7 @@ class LandingGear(GeomBase):
         """
 
         return float(Importer(Component='Landing Gear',
-                              VariableName='gearLongPos',
+                              VariableName='Main Gear position',
                               Default=0.6,
                               Path=self.filePath).getValue)
 
@@ -55,7 +55,7 @@ class LandingGear(GeomBase):
         """
 
         return float(Importer(Component='Landing Gear',
-                              VariableName='noseGearLongPos',
+                              VariableName='Nose Gear position',
                               Default=0.08,
                               Path=self.filePath).getValue)
 
@@ -68,7 +68,7 @@ class LandingGear(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Landing Gear',
-                              VariableName='gearLatPos',
+                              VariableName='Lateral gear position',
                               Default=1.8,
                               Path=self.filePath).getValue)
 
@@ -80,7 +80,7 @@ class LandingGear(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Landing Gear',
-                              VariableName='main wheel diameter',
+                              VariableName='Main wheel radius',
                               Default=0.5,
                               Path=self.filePath).getValue)
 
@@ -92,7 +92,7 @@ class LandingGear(GeomBase):
         :rtype: float
         """
         return float(Importer(Component='Landing Gear',
-                              VariableName='nose wheel diameter',
+                              VariableName='Nose wheel radius',
                               Default=0.3,
                               Path=self.filePath).getValue)
 
@@ -344,7 +344,7 @@ class LandingGear(GeomBase):
     @Attribute
     def hubHeightPos(self):
         """
-        Length of the main landing gear length.
+        Length of the main landing gear.
         :Unit: [m]
         :type: float
         :return:
@@ -396,18 +396,36 @@ class LandingGear(GeomBase):
 
     @Attribute
     def outputList(self):
+
         lst = {}
+
         inputs = {
             "Landing Gear":
                 {
-                    "Landing gear height": {"value": self.height, "unit": "m"},
-                    "Main Gear position": {"value": self.longPos, "unit": ""},
-                    "Nose Gear position": {"value": self.noseLongPos, "unit": ""},
-                    "Lateral gear position": {"value": self.latPos, "unit": ""},
-                    "Main wheel radius": {"value": self.wheelRadius, "unit": "m"},
-                    "Nose wheel radius": {"value": self.noseWheelRadius, "unit": "m"}
+                    "Inputs": {
+                        "Landing gear height": {"value": self.height, "unit": "m"},
+                        "Main Gear position": {"value": self.longPos, "unit": ""},
+                        "Nose Gear position": {"value": self.noseLongPos, "unit": ""},
+                        "Lateral gear position": {"value": self.latPos, "unit": ""},
+                        "Main wheel radius": {"value": self.wheelRadius, "unit": "m"},
+                        "Nose wheel radius": {"value": self.noseWheelRadius, "unit": "m"}
+                    },
+                    "Attributes": {
+                        "Tipback control": {"value": self.tipbackControl, "unit": ""},
+                        "Maximum tipback angle": {"value": self.maxTipbackAngle, "unit": "deg"},
+                        "Angle of tipback": {"value": self.tipbackAngle, "unit": "deg"},
+                        "Lateral clearance control": {"value": self.checkLateralAngle, "unit": ""},
+                        "Lateral clearance angle": {"value": self.lateralAngle, "unit": ""},
+                        "Longitudinal pos of main gear": {"value": self.hubLongPos, "unit": "m"},
+                        "Longitudinal pos of nose gear": {"value": self.noseHubLongPos, "unit": "m"},
+                        "Main landing gear length": {"value": self.hubHeightPos, "unit": "m"},
+                        "Nose landing gear length": {"value": self.noseHeightPos, "unit": "m"},
+                        "Lateral pos of main gear": {"value": self.hubLatPos, "unit": "m"}
+                    }
+
                 }
         }
+
         lst.update(inputs)
         return lst
 
