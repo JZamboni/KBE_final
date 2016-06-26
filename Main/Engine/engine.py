@@ -71,18 +71,6 @@ class Engine(GeomBase):
                               Path=self.filePath).getValue)
 
     @Input
-    def nEngine(self):
-        """
-        Number of engine of the aircraft
-        :Unit: [ ]
-        :rtype: integer
-        """
-        return float(Importer(Component='Engine',
-                              VariableName='nEngine',
-                              Default=2.,
-                              Path=self.filePath).getValue)
-
-    @Input
     def etaNozzle(self):
         """
         Efficiency of engine nozzle
@@ -142,18 +130,6 @@ class Engine(GeomBase):
                               Default=-0.15,
                               Path=self.filePath).getValue)
 
-    @Input
-    def enginePos(self):
-        """
-        Engine position, could be either "wing" or "fuselage" mounted
-        :Unit: [ ]
-        :rtype: float
-        """
-        return str(Importer(Component='Engine',
-                            VariableName='engine Position',
-                            Default='wing',
-                              Path=self.filePath).getValue)
-
     window = Tk()
     window.wm_withdraw()
 
@@ -163,6 +139,30 @@ class Engine(GeomBase):
         settable = True
     else:
         settable = False
+
+    @Input(settable=settable)
+    def nEngine(self):
+        """
+        Number of engine of the aircraft
+        :Unit: [ ]
+        :rtype: integer
+        """
+        return float(Importer(Component='Configuration',
+                              VariableName='nEngine',
+                              Default=2.,
+                              Path=self.filePath).getValue)
+
+    @Input(settable=settable)
+    def enginePos(self):
+        """
+        Engine position, could be either "wing" or "fuselage" mounted
+        :Unit: [ ]
+        :rtype: float
+        """
+        return str(Importer(Component='Configuration',
+                            VariableName='engine Position',
+                            Default='wing',
+                              Path=self.filePath).getValue)
 
     @Input(settable=settable)
     def filePath(self):
@@ -593,6 +593,26 @@ class Engine(GeomBase):
         elif self.nEngine == 2 and self.enginePos == 'fuselage':
             return [self.noseLength + self.cylinderLength - 0.20 * self.nacelleLength]
         #ToDo: la posizione longitudinal non garantisce che il motore non esca dalla fuselage.
+
+        @Attribute
+        def outputList(self):
+            lst = {}
+            inputs = {
+                "Fuselage":
+                    {
+                        "Engine bypass ratio": {"value": self.bypassRatio, "unit": ""},
+                        "Speed of sound at sea level": {"value": self.a0, "unit": "m/s"},
+                        "Air density at sea level": {"value": self.rho0, "unit": "kg/m^3"},
+                        "Temperature at Inlet of Turbine": {"value": self.TIT, "unit": "K"},
+                        "Nozzle efficiency": {"value": self.etaNozzle, "unit": ""},
+                        "Mechanical efficiency": {"value": self.etaMech, "unit": ""},
+                        "Cowling type": {"value": self.cowlingType, "unit": ""},
+                        "Cowling position": {"value": self.cowlingPos, "unit": ""},
+                        "Engine-LE stagger": {"value": self.engineStagger, "unit": ""}
+                    }
+            }
+            lst.update(inputs)
+            return lst
 
 # #### Part ##########################################################################################################
 
