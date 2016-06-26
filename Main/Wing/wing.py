@@ -356,7 +356,7 @@ class Wing(GeomBase):
         :Unit: [m^2]
         :rtype: float
         """
-        surface = self.mTOW / self.wingLoading
+        surface = self.mTOW / (self.wingLoading * 9.81)
         span = sqrt(surface * self.aspectRatio)
         rootCr = 2 * surface / ((1 + self.taperRatio) * span)
 
