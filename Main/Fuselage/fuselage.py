@@ -334,7 +334,9 @@ class Fuselage(GeomBase):
             "Performance":
                 {"Fuselage Length": {"value": self.fuselageLength, "unit": "m"},
                  "Fuselage Diameter": {"value": self.fuselageDiameter, "unit": "m"},
-                 "Fuselage Diameter": {"value": self.fuselageDiameter, "unit": "m"}}
+                 "Nose Slenderness": {"value": self.noseSlenderness, "unit": ""},
+                 "Tail Slenderness": {"value": self.tailSlenderness, "unit": ""},
+                 "Tail Up Angle": {"value": self.tailUpAngle, "unit": ""}}
         }
         lst.update(inputs)
 
