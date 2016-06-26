@@ -50,7 +50,7 @@ class Aircraft(GeomBase):
         """
         return float(Importer(Component='Performance',
                               VariableName='Wing loading',
-                              Default=5000.,
+                              Default=509.68,
                               Path=self.filePath).getValue)
 
     @Input
