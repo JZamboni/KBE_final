@@ -66,6 +66,18 @@ class Aircraft(GeomBase):
                               Path=self.filePath).getValue)
 
     @Input
+    def twRatio(self):
+        """
+        Aircraft Thrust to Weight ratio
+        :Unit: [ ]
+        :rtype: float
+        """
+        return float(Importer(Component='Performance',
+                              VariableName='Thrust to Weight ratio',
+                              Default=.29145,
+                              Path=self.filePath).getValue)
+
+    @Input
     def hCruise(self):
         """
         Aircraft cruise altitude
@@ -126,7 +138,7 @@ class Aircraft(GeomBase):
                             Default='low wing',
                             Path=self.filePath).getValue)
 
-    #### Attributes ###
+    # ### Attributes ###
 
     @Attribute
     def filePath(self):
@@ -180,6 +192,7 @@ class Aircraft(GeomBase):
                             "Cruise Mach number": {"value": self.maCruise, "unit": ""},
                             "Wing loading": {"value": self.wingLoading, "unit": "kg / m^2"},
                             "Maximum takeoff weight": {"value": self.mTOW, "unit": "N"},
+                            "Thrust to Weight ratio": {"value": self.twRatio, "unit": ""},
                             "Aircraft cruise altitude": {"value": self.hCruise, "unit": "m"},
                         },
                     "Attributes":
@@ -238,7 +251,9 @@ class Aircraft(GeomBase):
                       tcRatio=self.wingbase.tcRatio,
                       filePath=self.filePath,
                       nEngine=self.nEngine,
-                      enginePos=self.enginePos)
+                      enginePos=self.enginePos,
+                      mTOW=self.mTOW,
+                      twRatio=self.twRatio)
 
     @Part
     def vtpbase(self):
@@ -324,7 +339,8 @@ class Aircraft(GeomBase):
                            nacelleLength=self.enginebase.nacelleLength,
                            fuselage=self.fuselage.loft,
                            wing=self.wingbase.rightWing,
-                           enginePos=self.enginebase.enginePos)
+                           enginePos=self.enginebase.enginePos,
+                           filePath=self.filePath)
 
     @Part
     def node_writer(self):

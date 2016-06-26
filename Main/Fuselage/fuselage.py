@@ -38,7 +38,6 @@ class Fuselage(GeomBase):
                               Default=4.0,
                               Path=self.filePath).getValue)
 
-
     @Input
     def noseSlenderness(self):
         """
@@ -101,7 +100,6 @@ class Fuselage(GeomBase):
             divAngle = degrees(atan((R - r) / h - tan(tailUp)) + atan((R - r) / h + tan(tailUp)))
 
         return tSlend
-
 
     @Input
     def tailUpAngle(self):
@@ -234,6 +232,25 @@ class Fuselage(GeomBase):
         return degrees(atan((R - r) / (h) - tan(tailUp)) + atan((R - r) / (h) + tan(tailUp)))
 
     @Attribute
+    def fuselageSlenderness(self):
+        """
+        Fuselage Slenderness, fuselage Length / Diameter
+        :Unit: [ ]
+        :rtype: float
+        """
+        slend = self.fuselageLength / self.fuselageDiameter
+        if slend < 5:
+            showwarning("Warning", "The fuselage slenderness ratio is low."
+                                   " Try to increment fuselage length or lower diameter.")
+            return slend
+        elif slend > 15:
+            showwarning("Warning", "The fuselage slenderness ratio is high."
+                                   " Try to lower fuselage length or increment diameter.")
+            return slend
+        else:
+            return slend
+
+    @Attribute
     def maDD(self):
         """
         Aircraft Mach Dive Divergence
@@ -267,7 +284,12 @@ class Fuselage(GeomBase):
         :Unit: [m]
         :rtype: float
         """
-        return self.fuselageLength - (self.noseLength + self.tailLength)
+        cylL = self.fuselageLength - (self.noseLength + self.tailLength)
+        if cylL <= 0:
+            showwarning("Warning", "The length of fuselage cylindrical part is negative."
+                                   " Try to increment fuselage length or reduce fuselage diameter.")
+        else:
+            return cylL
 
     @Attribute
     def cylinderSectionRadius(self):
