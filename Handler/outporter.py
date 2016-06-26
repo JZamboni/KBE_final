@@ -53,7 +53,7 @@ class Outporter:
 
             outputPath = os.path.dirname(Output.__file__) + '\output ' + finalString + '.json'
 
-            from IOPorters.jsonOut import JsonOutOut as VarOutporter
+            from IOPorters.jsonOut import JsonOut as VarOutporter
 
         else:
             print ('Warning:    File type ' + repr(fileExt) + ' is not supported in this application. '
