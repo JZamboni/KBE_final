@@ -24,6 +24,10 @@ class Aircraft(GeomBase):
 
     @Input
     def projectName(self):
+        """
+        Name of the project or of the airplane.
+        :return:
+        """
         return str(Importer(Component='Configuration',
                               VariableName='Aircraft name',
                               Default='Tail sizing',
