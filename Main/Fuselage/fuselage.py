@@ -337,7 +337,7 @@ class Fuselage(GeomBase):
                         "Tail Up Angle": {"value": self.tailUpAngle, "unit": ""}
                     },
                     "Attributes": {
-                        "Ciao": {"value": self.airfoilEffW, "unit": ""}
+                        "Ciao": {"value": "ciao", "unit": ""}
                     }
 
                 }

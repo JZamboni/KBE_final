@@ -13,38 +13,46 @@ class ExcelOut:
     def writer(self):
         wb = Workbook(guess_types=True)
         ws = wb.active
-
-        row = 1
         col = 1
+        lst = self.listValues
+        firstRow = ["Component:", "Variable:", "Value:", "Unit:"]
 
-        li
+        for stringa in firstRow:
 
-        lst = [["Project name", "Project Name"],
-               [None],
-               ["Component:", "Variable:", "Value:", "Unit:"]]
+            _ = ws.cell(column=col, row=1, value="%s" % stringa)
+            col += 1
+        row = 3
 
-        lst.extend([["EOF"]])
 
-        for component in self.listValues:
-            for
-        for line in self.listValues:
 
-            for value in line:
+        for component in lst:
+
+            _ = ws.cell(column=1, row=row, value="%s" % component)
+
+            row += 1
+
+            for variable in lst[component]["Inputs"]:
+
+                _ = ws.cell(column=2, row=row, value="%s" % variable)
+
+                value = lst[component]["Inputs"][variable]["value"]
                 if value is None:
                     pass
                 elif type(value) is float:
-                    fill = ws.cell(column=col, row=row, value="%g" % value)
+                    fill = ws.cell(column=3, row=row, value="%g" % value)
                     fill.number_format = '0.00'
                 else:
-                    _ = ws.cell(column=col, row=row, value="%s" % value)
+                    _ = ws.cell(column=3, row=row, value="%s" % value)
 
-                col+=1
+                unit = lst[component]["Inputs"][variable]["unit"]
+                _ = ws.cell(column=4, row=row, value="%s" % unit)
 
-            row += 1
-            col = 1
+                row += 1
 
+            _ = ws.cell(column=2, row=row, value="EOC")
+            row += 2
 
-
-            wb.save(filename=self.path)
+        _ = ws.cell(column=1, row=row+1, value="EOF")
+        wb.save(filename=self.path)
 
         return "Output file correctly generated"

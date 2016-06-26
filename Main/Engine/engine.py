@@ -614,7 +614,7 @@ class Engine(GeomBase):
                         "Engine-LE stagger": {"value": self.engineStagger, "unit": ""}
                     },
                     "Attributes": {
-                        "Ciao": {"value": self.airfoilEffW, "unit": ""}
+                        "Ciao": {"value": "ciao", "unit": ""}
                     }
 
                 }

@@ -411,7 +411,7 @@ class LandingGear(GeomBase):
                         "Nose wheel radius": {"value": self.noseWheelRadius, "unit": "m"}
                     },
                     "Attributes": {
-                        "Ciao": {"value": self.airfoilEffW, "unit": ""}
+                        "Ciao": {"value": "ciao", "unit": ""}
                     }
 
                 }
