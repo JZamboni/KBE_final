@@ -17,13 +17,16 @@ class ExcelOut:
         row = 1
         col = 1
 
+        li
+
         lst = [["Project name", "Project Name"],
                [None],
                ["Component:", "Variable:", "Value:", "Unit:"]]
 
         lst.extend([["EOF"]])
 
-
+        for component in self.listValues:
+            for
         for line in self.listValues:
 
             for value in line:
@@ -39,6 +42,8 @@ class ExcelOut:
 
             row += 1
             col = 1
+
+
 
             wb.save(filename=self.path)
 

@@ -12,7 +12,6 @@ class JsonOut:
 
     def writer(self):
 
-        print json.dumps(self.listValues, indent=5, sort_keys=True)
         fout = open(self.path, 'w')
         json.dump(self.listValues, fout, indent=5, sort_keys=True)
         return "Output file correctly generated"
