@@ -142,6 +142,8 @@ class Aircraft(GeomBase):
         lst = {}
         lst.update(self.fuselage.outputList)
         lst.update(self.enginebase.outputList)
+        lst.update(self.evaluations.outputList)
+        lst.update(self.landingGear.outputList)
         return lst
 
     #### Parts ####

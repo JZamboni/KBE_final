@@ -394,6 +394,7 @@ class LandingGear(GeomBase):
 
         return Ymlg
 
+    @Attribute
     def outputList(self):
         lst = {}
         inputs = {
